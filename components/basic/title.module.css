@@ -1,0 +1,15 @@
+.title{
+        font-size:3rem;
+        font-family: arial,sans-serif;
+        line-height:3.2rem;
+        min-height:3.5rem;
+        max-height:9.8rem;
+        filter: brightness(200%);
+        margin-bottom:1rem;
+        font-weight: 800;
+        color:white;
+        overflow: hidden;
+        white-space: wrap;
+        text-overflow: ellipsis;
+        text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}

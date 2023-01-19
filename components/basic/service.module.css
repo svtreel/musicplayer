@@ -1,0 +1,16 @@
+.container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+        padding:1rem;
+        padding-bottom:2rem;
+}
+.icon{
+        width:25px;
+        filter: saturate(0%);
+}
+.text{
+        margin-left:1rem;
+}

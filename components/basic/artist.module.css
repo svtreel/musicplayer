@@ -1,0 +1,17 @@
+.artist{
+        margin-top:2rem; 
+        font-size:1.9rem;
+        line-height:2rem;
+        min-height:2.3rem;
+        max-height:2.2rem;
+        margin-bottom:1rem;
+        /* color:#ccc; */
+        white-space: nowrap;
+        filter: brightness(100%);
+        font-weight: 400;
+        color:#999;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}

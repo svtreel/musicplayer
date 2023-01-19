@@ -1,0 +1,26 @@
+.artwork{
+        width:350px;
+        height:350px;
+        border-radius:20px !important;
+}
+.artwork:active{
+        transform:scale(0.8);
+}
+.pausecontainer{
+        width:250px;
+        height:250px;
+        background-color:black;
+        position:absolute;
+        display:flex;
+}
+.pause{
+        width:350px;
+        border-radius:20px;
+        height:350px;
+        opacity:0;
+        padding:4rem;
+        position:absolute;
+        background-color:black;
+        background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+        display:flex;
+}

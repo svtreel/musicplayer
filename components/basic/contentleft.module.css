@@ -1,0 +1,16 @@
+.container{
+        width:50%;
+        display:flex;
+        position:absolute;
+        justify-content:center;
+        align-items:center;
+        padding:2rem;
+
+        margin-top:2rem;
+}
+.pause{
+        width:100%;
+        height:100%;
+        position:absolute;
+        display:flex;
+}

@@ -1,0 +1,57 @@
+.container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        bottom:0px;
+        position:relative;
+        background-color: rgba(0,0,0,1)
+}
+.wrapper{
+        background-color:#888;
+        min-width:95%;
+        height: 5px;
+        box-shadow: 2px 3px 8px rgba(0,0,0,0.23);
+}
+.knob{
+        position:relative;
+        float:right;
+        background-color:white;
+        width:8px;
+        height:8px;
+        border-top:1px solid white;
+        border-radius:100%;
+        top:-2px;
+        right:-2px;
+        opacity:1;
+}
+.knob2, .knob3{
+        position:absolute;
+        float:right;
+        background-color:#999;
+        width:1px;
+        height:5px;
+        top:0px;
+}
+.knob2{
+        float:left;
+        left:0px;
+}
+.knob3{
+        float:right;
+        right:0px;
+}
+.progress{
+        height:5px;
+        width:0%;
+        border-radius:30px;
+        filter:brightness(170%);
+        background-color:#bada55;
+        transition: 3s;
+}
+.wrapper p {
+        position:absolute;
+        right:0;
+        margin-top:-1.5rem;
+        padding-right:0.25rem;
+        color:#999;
+}

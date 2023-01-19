@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;  
+  padding: 0rem;
+  margin: 0rem;
+}
+html,
+body {
+  cursor: none;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height:100%;
+  min-height:100%;
+  background-color:#444;
+  /* background-color:white; */
+  overflow: hidden;
+}
+.playercontainer{
+  height:100%;
+  width:100%;
+  display:flex;
+  position: absolute;
+  color:white;
+}
+.playerleftcol{
+  display:flex;
+  margin:1rem;
+  margin-right:0rem;
+  margin-bottom:0;
+  padding:1rem;
+  flex-direction: flex-basis;
+  justify-content:center;
+  align-items:center;
+  transition: .2s;
+  transform: scale(1);
+  z-index:9999999999999;
+}
+
+.playerleftcol:active{
+  transform: scale(0.9555);
+}
+.playerleftcol .pause{
+  width:130px;
+  height:130px;
+  position:absolute;
+  z-index:999999999999999999999999999999999999999999999999999999999999;
+}
+.playerleftcolblock{
+  height: calc(80% - 1.5rem);
+  width: calc(80% - 0.5rem);
+  margin-left:0rem;
+  margin-right:2rem;
+  border-radius:20px;
+  position:absolute;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.55), rgba(0,0,0,0.9));
+  z-index:999;
+}
+.newloadingcontainer{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.playerrightcol{
+
+  display:flex;
+  margin:1rem;
+  margin-right:0rem;
+  margin-bottom:0;
+  padding:1rem;
+  flex-direction: flex-basis;
+  justify-content:center;
+  align-items:center;
+  transition: .2s;
+  background:linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.0));
+  transform: scale(1);
+  z-index:9999999999999;
+
+/* 
+  display:block;
+  /* padding:1rem; 
+  margin-top:1rem;
+  padding:0.5rem;
+  padding-right:1rem;
+  min-width:40%;
+  max-width:40%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.0));
+  z-index:98888888888;
+  border-radius:20px; */
+}
+.playerrightcolskipcontainer{
+  position:relative;
+  display:flex;
+  bottom:0px;
+  justify-content:center
+}
+.playerrightcolskipcontainer .skip{
+  margin:1rem;
+  width: 60px;
+  height: 60px;
+  opacity:0.5;
+  transform: scale(1);
+  transition: 0.2;
+}
+.playerrightcolskipcontainer .skiprotate{
+  margin:1rem;
+  width: 60px;
+  height: 60px;
+  opacity:0.5;
+  transform: scale(1);
+  transform: rotate(180deg);
+}
+.playerrightcolskipcontainer .skip:active{
+  width: 60px;
+  height: 60px;
+  opacity:0.5;
+  transform: scale(1.22);
+  transition: 0.2;
+}
+.playerrightcolskipcontainer .skiprotate:active{
+  margin:3rem;
+  width: 60px;
+  height: 60px;
+  opacity:0.5;
+  transform: scale(1.22);
+  transform: rotate(180deg);
+}
+.playerservicecontainer{
+  position:absolute;
+  display:flex;
+  top:1rem;
+  left:1rem;
+  color:white;
+  align-items: center;
+  justify-content:center;
+  margin-bottom:1.3rem;
+}
+.playercontainer span{
+  margin-left:2rem;
+}
+.playerrightcol spanbut{
+  font-size:0.9rem !important;
+  display:flex;
+  position: absolute;
+  margin-bottom:2rem;
+  bottom:0px;
+  color:#999;
+}
+.playercontainer h1{
+  font-size:3rem;
+  font-family: arial,sans-serif;
+  line-height:3.2rem;
+  min-height:3.2rem;
+  max-height:9.8rem;
+  margin-bottom:1rem;
+  /* color:#ccc; */
+  font-weight: 800;
+  color:white;
+  overflow: hidden;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}
+.playercontainer h2{
+  margin-top:2rem; 
+  font-size:1.9rem;
+  line-height:2rem;
+  min-height:2.3rem;
+  max-height:2.2rem;
+  margin-bottom:1rem;
+  /* color:#ccc; */
+  white-space: nowrap;
+  font-weight: 400;
+  color:#999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}
+.playercontainer h3{
+  font-size:1.75rem !important;
+  line-height:1.9rem;
+  min-height:2.4rem;
+  max-height:2.4rem;
+  text-align:right;
+  margin-bottom:0.75rem;
+  /* color:#ccc; */
+  font-weight: 100;
+  color:#999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis ;
+  text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}
+
