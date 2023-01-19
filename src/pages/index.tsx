@@ -32,9 +32,7 @@ export default function Home() {
         )
         const [isPause, setisPause] = useState(false)
         const [loading, setloading] = useState(true)
-        const [update, setupdate] = useState(0)
         const [progress, setProgress] = useState(0)
-        const [avgcolor, setavgcolor] = useState()
         const [lastimageanalysed, setlastimageanalysed] = useState()
         const [onswitch, setonswitch] = useState(false)
         const [isBeingChecked, setIsBeingChecked] = useState(false)
@@ -148,9 +146,6 @@ export default function Home() {
                 setColourPalette(myPalette.colors)
         }
    
-        const updateSong = () => {
-                setupdate(update+1)
-        };
         const handleClickPause = () => {
                 setisPause(true)
                 fetch("http://192.168.0.222:11000/Pause")
@@ -171,32 +166,31 @@ export default function Home() {
 
 
         return <>
-                <Head>
-                        <title>{props.titleForPage} . Waver</title>
-                        <link
-                                href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-                                rel="stylesheet"
-                        />
-                </Head>
-                  {loading == true && <>
-                          <Waitscreen/>
-                  </>}
-                  {loading == false && colourPalette != undefined && data.quality != "n/A" && <>
-                          {/* <Controller 
-                              data = { swipeAnimation }
-                          /> */}
-                          <Playercontainer
-                            data              = { data }
-                            progress          = { progress }
-                            onswitch          = { onswitch }
-                            isPause           = { isPause }
-                            artwork           = { data.image }
-                            colourPalette     = { colourPalette }
-                            action_pause      = { handleClickPause }
-                            action_play       = { handleClickPlay }
-                            swipeAnimation    = { swipeAnimation }
-                          />
-                  </>}                    
+
+                <link
+                        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+                        rel="stylesheet"
+                />
+
+                        {loading == true && <>
+                                <Waitscreen/>
+                        </>}
+                        {loading == false && colourPalette != undefined && data.quality != "n/A" && <>
+                                {/* <Controller 
+                                data = { swipeAnimation }
+                                /> */}
+                                <Playercontainer
+                                data              = { data }
+                                progress          = { progress }
+                                onswitch          = { onswitch }
+                                isPause           = { isPause }
+                                artwork           = { data.image }
+                                colourPalette     = { colourPalette }
+                                action_pause      = { handleClickPause }
+                                action_play       = { handleClickPlay }
+                                swipeAnimation    = { swipeAnimation }
+                                />
+                        </>}                    
                 </>
 }
 

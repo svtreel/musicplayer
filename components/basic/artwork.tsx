@@ -14,8 +14,13 @@ export default function Component( props: Props ) {
         return<>
                 { props.paused == true && <> 
                         {/* <div className={s.pauseContainer}> */}
-                                <Image
-                                        src = { pauseImage} 
+                        <div 
+                                className = { s.pause }
+                                onClick = { (e)=> props.action() }>
+                                <span className = { [s.pause, "material-symbols-outlined"] }>pause</span>
+                        </div>
+                                {/* <Image
+                                        src = { pauseImage } 
                                         alt = "Pause"
                                         width = { 350 }
                                         height = { 350 }
@@ -24,7 +29,7 @@ export default function Component( props: Props ) {
                                                 opacity: "1"
                                         }}
                                         onClick = { (e)=> props.action() }
-                                />
+                                /> */}
                         {/* </div> */}
                 </>}
                 {props.artwork != undefined && <>
