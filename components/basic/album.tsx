@@ -11,4 +11,4 @@ export default function Component( props: Props ) {
                         {props.text}
                 </p>
         </>
-}
+} 

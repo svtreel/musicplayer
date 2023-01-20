@@ -30,7 +30,7 @@ interface Props {
                 direction: string, 
                 delta: number,
         }
-        onswitch: boolean;
+        onswitch: boolean; 
         artwork: string | null;
         progress: number;
         isPause: boolean;
