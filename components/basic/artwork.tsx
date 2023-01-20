@@ -12,14 +12,17 @@ interface Props {
 export default function Component( props: Props ) {
 
         return<>
+        
                 { props.paused == true && <> 
                         {/* <div className={s.pauseContainer}> */}
-                        <div 
+                        
+                        {/* <div 
                                 className = { s.pause }
                                 onClick = { (e)=> props.action() }>
-                                <span className = { [s.pause, "material-symbols-outlined"] }>pause</span>
-                        </div>
-                                {/* <Image
+                                        
+                                <span className = { [s.pause, "material-icons-outlined"] }>pause</span>
+                        </div> */}
+                                <Image
                                         src = { pauseImage } 
                                         alt = "Pause"
                                         width = { 350 }
@@ -28,8 +31,8 @@ export default function Component( props: Props ) {
                                         style = {{
                                                 opacity: "1"
                                         }}
-                                        onClick = { (e)=> props.action() }
-                                /> */}
+                                        onClick = { (e) => props.action() }
+                                />
                         {/* </div> */}
                 </>}
                 {props.artwork != undefined && <>
