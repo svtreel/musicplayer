@@ -8,20 +8,20 @@ import Songprogress from './songprogress'
 
 interface Props {
         artist: string | null;
-        state: string | null;
-        service: string | null;
-        artwork: string | null; 
-        title: string | null;
-        title2: string | null;
-        serviceIcon: string | null;
+        state: string | null;
+        service: string | null;
+        artwork: string | null; 
+        title: string | null;
+        title2: string | null;
+        serviceIcon: string | null;
         connecting: boolean;
-        album: string | null;
-        lightmuted: string | null;
-        lightvibrant: string | null;
-        vibrant: string | null;
-        muted: string | null;
-        darkvibrant: string | null;
-        darkvibrantlight: string | null;
+        album: string | null;
+        lightmuted: string | null;
+        lightvibrant: string | null;
+        vibrant: string | null;
+        muted: string | null;
+        darkvibrant: string | null;
+        darkvibrantlight: string | null;
         songLength: number;
         progress: number;
         onswitch: boolean;
@@ -46,7 +46,7 @@ export default function Component( props: Props ) {
                                         text    = { props.album }
                                 />
                         </>}
-                        {props.progress <= 100 && props.state != "connecting" && props.service != "TuneIn" && <> 
+                        { props.progress <= 100 && props.state != "connecting" && props.service != "TuneIn" && <> 
                                 <Songprogress 
                                         progress         = { props.progress } 
                                         color            = { null }
@@ -60,7 +60,6 @@ export default function Component( props: Props ) {
                                         tidal            = { props.service != "TidalConnect" ? true : false }
                                 />
                         </>}
-
                         {props.state == "connecting" && <> 
                                 <Loader/>
                         </>}

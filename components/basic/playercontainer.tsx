@@ -5,18 +5,18 @@ import Service          from './service'
 
 interface Props {
         data: {
-                artist: string | null,
-                image: string | null,
-                length: number | null,
-                quality: string | null,
-                seconds: string | null,
-                service: string | null,
-                serviceIcon: string | null,
-                state: string | null,
-                title1: string | boolean | null,
-                title2: string | boolean | null | undefined,
-                title3: string | boolean | null | undefined,
-                volume: string | null
+                artist: string | boolean | null,
+                image: string | null,
+                length: number | null,
+                quality: string | null,
+                seconds: string | null,
+                service: string | null,
+                serviceIcon: string | null,
+                state: string | null,
+                title1: string | boolean | null,
+                title2: string | boolean | null | undefined, 
+                title3: string | boolean | null | undefined,
+                volume: string | null
         }
         colourPalette: {
                 muted: string,
@@ -31,26 +31,46 @@ interface Props {
                 delta: number,
         }
         onswitch: boolean;
-        artwork: string | null;
+        artwork: string | null;
         progress: number;
         isPause: boolean;
         action_pause: Function;
         action_play: Function;
+        topmarginPlayercontainer: string;
 }
 
 export default function Component( props: Props ) {
-
-        const cut = props.swipeAnimation.delta >= 200 ? 200 : props.swipeAnimation.delta
+        const factor = 25
+        const cut = props.swipeAnimation.delta <= 200 ? props.swipeAnimation.delta : 200 
         const perspective = props.swipeAnimation.delta != 0 ? 600-cut : 2000
-        const leftright = props.swipeAnimation.direction == "right" ? "2deg" : "-2deg"
+        const left = props.swipeAnimation.direction == "right" ? props.swipeAnimation.delta/factor : null
+        const right = props.swipeAnimation.direction == "left" ? props.swipeAnimation.delta/factor : null
+        const up = props.swipeAnimation.direction == "up" ? props.swipeAnimation.delta/factor: null
+        const down = props.swipeAnimation.direction == "down" ? props.swipeAnimation.delta/factor : null
 
+        const animationDirection_init = () => {
+                let animationDirection_style = null
+
+                const ls = left != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateY(${left}deg)` : null
+                const rs = right != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateY(-${right}deg)` : null
+                const us = up != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateX(${up}deg)` : null
+                const ds = down != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateX(-${down}deg)` : null
+                
+                left != null ? animationDirection_style = ls : null
+                right != null ? animationDirection_style = rs : null
+                up != null ? animationDirection_style = us : null
+                down != null ? animationDirection_style = ds : null
+
+                return animationDirection_style
+        }
 
         return <>
-                {props.data && <>
-                        <div className={ s.container }
-                        style = {{
-                                transform: `perspective(${perspective}px) scale(${perspective/(perspective+5)}) rotateY(${leftright})`
-                        }}
+                { props.data && <>
+                        <div className={ s.container } 
+                                style = {{
+                                        transform: animationDirection_init(),
+                                        marginTop: props.topmarginPlayercontainer
+                                }}
                         >
                                 { props.data && props.data.service && props.data.service !== "Capture" && <>
                                         <Service
