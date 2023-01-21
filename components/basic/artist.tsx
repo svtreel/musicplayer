@@ -13,7 +13,7 @@ export default function Component( props: Props ) {
 
         return <>
                 <p className={ s.artist } style = { style }>
-                      - { props.text }
+                      hi { props.text }
                 </p>
         </>
 }
