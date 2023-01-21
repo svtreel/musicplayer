@@ -53,7 +53,6 @@ export default function Home() {
         const [countShutdown, setCountShutdown] = useState( 0 )
         const [shutDown, setShutdown] = useState( false )
 
-
         useEffect(() => {
                 (
                         async () => {
