@@ -11,7 +11,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 export default function Home() {
 
-        const shutDownWhenStopSeconds = 3
+        const shutDownWhenStopSeconds = 120
 
         const [data, setdata] = useState(
           {
