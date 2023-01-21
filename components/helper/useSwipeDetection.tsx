@@ -119,6 +119,10 @@ export default function useSwipeDetection(left: Function, right: Function, up: F
       setEndX( null );
       setStartY( null );
       setEndY( null );
+      setStartX( null )
+      setEndX( null )
+      setStartY( null )
+      setEndY( null )
     };
 
     window.addEventListener('touchstart', handleTouchStart, false);
