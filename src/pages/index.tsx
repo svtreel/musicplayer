@@ -13,8 +13,7 @@ import React, {useState, useEffect, useRef} from 'react'
 export default function Home() {
 
         const refreshRate = 1200
-        const shutDownWhenStopSeconds = 2000 / 60
-        const turnOffTresholdMinutes = 0.3
+        const shutDownWhenStopSeconds = 2
 
         const [data, setdata] = useState(
           {
@@ -50,17 +49,26 @@ export default function Home() {
                   delta: 0
                 }
         )
-        
-        const [turnoffCounter, setturnoffCounter] = useState( 10 )
-        const [turnoffState, setturnoffState] = useState( false )
         const [waitduration, setwaitduration] = useState( refreshRate )
         const [waitdurationUntilShutDown, setwaitdurationUntilShutDown] = useState( shutDownWhenStopSeconds )
         const [countShutdown, setCountShutdown] = useState( 0 )
         const [shutDown, setShutdown] = useState( false )
 
-        useEffect(() => {
 
-        }, [menuitem])
+        useEffect(() => {
+                (
+                        async () => {
+                                if (shutDown) {
+                                        const url = "/api/shutdown";
+                                        const r = await fetch( url );
+                                }
+                                if (!shutDown) {
+                                        const url = "/api/turnon";
+                                        const r = await fetch( url );
+                                }
+                        }
+                )()
+        }, [shutDown])
 
         const resetAnimationStyle = ( direction: string ) => {
                 setSwipeAnimation({
@@ -71,7 +79,6 @@ export default function Home() {
 
         useEffect(() => {
                 const refreshInterval = setInterval(async () => {
-
 
                         if ( menuitem === null ) {
 
@@ -91,23 +98,33 @@ export default function Home() {
                                         const r = await fetch( url );
                                         const playerdata = await r.json();
 
-                                        playerdata.state === "pause"
-                                                ? setisPause( true )
-                                                : setisPause( false );
-                                        playerdata.state === "stop"
-                                                ? setCountShutdown( countShutdown+1 )
-                                                : setCountShutdown( 0 );
-                                        playerdata.state === "pause"
-                                                ? setCountShutdown( countShutdown+0.25 )
-                                                : setCountShutdown( 0 );
+                                        if (playerdata.state === "pause"){
+                                                setisPause( true )
+                                                setCountShutdown( countShutdown + 0.25 )
+                                        } else {
+                                                setisPause( false )
+                                                setShutdown( false )
+                                        }
+
+                                        if (playerdata.state === "stop") {
+                                                setCountShutdown( countShutdown + 1 )
+                                        } else {
+                                                if (playerdata.state !== "pause") {
+                                                        setCountShutdown( 0 )
+                                                }     
+                                        }
+                                        // countShutdown >= shutDownWhenStopSeconds 
+                                        //         ? console.log("showing overlay") 
+                                        //         : null
+                                        // countShutdown >= shutDownWhenStopSeconds * 2
+                                        //         ? console.log("must shutdown display") 
+                                        //         : null
                                         countShutdown >= shutDownWhenStopSeconds 
                                                 ? setShowStopOverlay( true ) 
                                                 : setShowStopOverlay( false )
-                                        countShutdown >= shutDownWhenStopSeconds*1.5 
+                                        countShutdown >= shutDownWhenStopSeconds * 2
                                                 ? setShutdown( true ) 
                                                 : setShutdown( false )
-
-
 
                                         if ( lastimageanalysed !== playerdata.image && playerdata.state != "connecting" ) {
                                                 const v = new Vibrant( playerdata.image );
@@ -206,15 +223,10 @@ export default function Home() {
 
 
         return <>
-                {/* <link
-                        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-                        rel="stylesheet"
-                />
-                <span className = { ["material-icons-outlined"] }>pause</span> */}
                 { showStopOverlay === true &&<>
                         <div 
                                 className = { "overlay" }
-                                onClick = { (e)=> {setShowStopOverlay( false ), setCountShutdown( 0 )}  }>
+                                onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
                 { topMenu === true && <> 
