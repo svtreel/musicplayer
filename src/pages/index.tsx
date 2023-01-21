@@ -3,7 +3,6 @@ import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
 import Head from 'next/head'
 import Menu from '../../components/basic/menu'
-// import Controller from '../../components/basic/controller'
 
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
@@ -223,7 +222,10 @@ export default function Home() {
 
 
         return <>
-                { showStopOverlay === true &&<>
+
+
+
+                { showStopOverlay === true &&<><div >asjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlh</div>
                         <div 
                                 className = { "overlay" }
                                 onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
