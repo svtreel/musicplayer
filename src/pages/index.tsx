@@ -11,7 +11,7 @@ import React, {useState, useEffect, useRef} from 'react'
 
 export default function Home() {
 
-        const shutDownWhenStopSeconds = 120
+        const shutDownWhenStopSeconds = 3
 
         const [data, setdata] = useState(
           {
@@ -222,8 +222,6 @@ export default function Home() {
 
 
         return <>
-
-<div >asjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlhasjdlh</div>
 
                 { showStopOverlay === true &&<>
                         <div 
