@@ -12,7 +12,6 @@ import React, {useState, useEffect, useRef} from 'react'
 
 export default function Home() {
 
-        const refreshRate = 1200
         const shutDownWhenStopSeconds = 120
 
         const [data, setdata] = useState(
@@ -49,7 +48,7 @@ export default function Home() {
                   delta: 0
                 }
         )
-        const [waitduration, setwaitduration] = useState( refreshRate )
+        const [waitduration, setwaitduration] = useState( 1200 )
         const [waitdurationUntilShutDown, setwaitdurationUntilShutDown] = useState( shutDownWhenStopSeconds )
         const [countShutdown, setCountShutdown] = useState( 0 )
         const [shutDown, setShutdown] = useState( false )
@@ -61,10 +60,12 @@ export default function Home() {
                                 if (shutDown) {
                                         const url = "/api/shutdown";
                                         const r = await fetch( url );
+                                        setwaitduration(1200)
                                 }
                                 if (!shutDown) {
                                         const url = "/api/turnon";
                                         const r = await fetch( url );
+                                        setwaitduration(10000)
                                 }
                         }
                 )()
