@@ -227,7 +227,7 @@ export default function Home() {
                 { showStopOverlay === true &&<>
                         <div 
                                 className = { "overlay" }
-                                onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
+                                onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
                 { topMenu === true && <> 
