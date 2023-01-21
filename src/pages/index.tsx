@@ -223,6 +223,10 @@ export default function Home() {
 
         return <>
 
+<link
+                        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+                        rel="stylesheet"
+            />
                 { showStopOverlay === true &&<>
                         <div 
                                 className = { "overlay" }

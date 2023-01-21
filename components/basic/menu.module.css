@@ -6,4 +6,5 @@
     top:0;
     flex-direction: row;
     align-content:stretch;
+    z-index:99999999;
 }
