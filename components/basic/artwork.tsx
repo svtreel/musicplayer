@@ -3,45 +3,34 @@ import pauseImage from '/src/images/pause.png'
 import Image from "next/image"
 
 interface Props {
-  pauseImage: string | null;
+  pauseImage: string | null;
   artwork: string | null;
-  paused: boolean | null;
+  paused: boolean | null;
   action: Function;
 }
 
 export default function Component( props: Props ) {
 
-        return<>
-        
+        return <>
                 { props.paused == true && <> 
-                        {/* <div className={s.pauseContainer}> */}
-                        
-                        {/* <div 
-                                className = { s.pause }
-                                onClick = { (e)=> props.action() }>
-                                        
-                                <span className = { [s.pause, "material-icons-outlined"] }>pause</span>
-                        </div> */}
-                                <Image
-                                        src = { pauseImage } 
-                                        alt = "Pause"
-                                        width = { 350 }
-                                        height = { 350 }
-                                        className = { s.pause }
-                                        style = {{
-                                                opacity: "1"
-                                        }}
-                                        onClick = { (e) => props.action() }
-                                />
-                        {/* </div> */}
-                </>}
-                {props.artwork != undefined && <>
+                        <link
+                                href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+                                rel="stylesheet">
+
+                        </link>
+                        <div className = { s.container }>
+                                <div className="material-icons-outlined" onClick = { (e)=>props.action() }>
+                                        pause
+                                </div>
+                        </div>
+                </> }
+                { props.artwork != undefined && <>
                         <img 
                                 className = { s.artwork }
                                 alt = "Artwork"
                                 src = { props.artwork } 
                                 onClick = { (e)=>props.action() }
                         />
-                </>}
+                </> }
         </>
 }

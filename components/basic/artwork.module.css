@@ -24,3 +24,22 @@
         background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
         display:flex;
 }
+.container{
+        width:360px;
+        height:360px;
+        font-size:50px !important;
+        border-radius:20px;
+        opacity:1;
+        padding:4rem;
+        position:absolute;
+        background-color:black;
+        background: radial-gradient(circle at center, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+        display:flex;
+        justify-content: center;
+        align-items: center;
+}.container div {
+        border-radius: 30px;
+        padding:calc(2rem - 4px);
+        font-size:12.5rem;
+        font-weight: 100;
+    }
