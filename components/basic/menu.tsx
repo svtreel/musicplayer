@@ -65,10 +65,10 @@ export default function Component( props: Props ) {
                 action = { props.action }
             />
             <div className = { s.content }>
-                { data == [] && <> 
+                { data.length >= 0 && <> 
                     <Loader></Loader>
                 </>}
-                { data !== [] &&  <> 
+                { data.length >= 1 &&  <> 
                     {React.Children.toArray( data.map( ( el ) => ( <> 
                         <div className={s.selectable}>
                             <img className={s.selectableImage} src = { el.image } ></img>
