@@ -50,7 +50,7 @@ export default function Home( ) {
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
-        }, [ data.seconds ] )
+        }, [ data.seconds ] )
         
         const updateImageOnDemand = useMemo( ( ) => { 
                 const i = data.image !== "n/A" ? data.image : ""
@@ -89,10 +89,10 @@ export default function Home( ) {
                         } else {
                                 console.log( "Updating..." )
 
-                                swipeAnimation.direction == "right" ? resetAnimationStyle() : null
-                                swipeAnimation.direction == "left" ? resetAnimationStyle() : null
-                                swipeAnimation.direction == "up" ? resetAnimationStyle() : null
-                                swipeAnimation.direction == "down" ? resetAnimationStyle() : null
+                                // swipeAnimation.direction == "right" ? resetAnimationStyle() : null
+                                // swipeAnimation.direction == "left" ? resetAnimationStyle() : null
+                                // swipeAnimation.direction == "up" ? resetAnimationStyle() : null
+                                // swipeAnimation.direction == "down" ? resetAnimationStyle() : null
                                 
                                 if ( isBeingChecked === false ) {
                                         setIsBeingChecked( true );
@@ -101,6 +101,12 @@ export default function Home( ) {
                                         const url = "/api/getmeta";
                                         const r = await fetch( url );
                                         const playerdata = await r.json( );
+
+                                        if ( playerdata.service === "Capture" ){
+                                                setCountShutdown( countShutdown + 5 )
+                                        } else {
+                                                setShutdown( false )
+                                        }
 
                                         if ( playerdata.state === "pause" ){
                                                 setisPause( true )

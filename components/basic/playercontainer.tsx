@@ -3,7 +3,7 @@ import Contentleft      from './contentleft'
 import Contentright     from './contentright'
 import Service          from './service'
 import React from 'react'
-
+ 
 interface Props {
         data: {
                 artist: string,
