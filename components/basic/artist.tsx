@@ -1,3 +1,4 @@
+import React from 'react';
 import s from './artist.module.css'
 
 interface Props {

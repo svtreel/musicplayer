@@ -1,5 +1,6 @@
 import s from './menuitem.module.css'
 import MenuItem from './menuitem'
+import React from 'react';
 
 interface Props {
         label: string;
@@ -12,7 +13,7 @@ export default function Component( props: Props ) {
 
         const colour = props.colour ? "3px solid" + props.colour : "white"
 
-        return <>
+        return <> 
             <div className={s.container} onClick = { (e) => props.action(props.label) }>
                 {/* <div className="material-icons-outlined"
                         style = {{ border: colour }}>

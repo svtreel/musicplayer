@@ -1,6 +1,6 @@
+import React from 'react';
 import s from './artwork.module.css'
-import pauseImage from '/src/images/pause.png'
-import Image from "next/image"
+// import Image from "next/image"
 
 interface Props {
   pauseImage: string | null;

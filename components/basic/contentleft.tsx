@@ -2,6 +2,7 @@ import s from './contentleft.module.css'
 import Artwork from './artwork'
 import Image from 'next/image'
 import Loader from './loader'
+import React from 'react';
 
 interface Props {
         serviceIcon: string | null;

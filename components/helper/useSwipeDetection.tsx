@@ -86,10 +86,10 @@ export default function useSwipeDetection(left: Function, right: Function, up: F
     const handleTouchEnd = (event: TouchEvent) => {
 
       const distanceX = distance_initX(startX, endX);
-      const deltaX = startX > endX ? Math.round( startX-endX ) : Math.round( endX-startX )
+      // const deltaX = startX > endX ? Math.round( startX-endX ) : Math.round( endX-startX )
       
       const distanceY = distance_initY(startY, endY);
-      const deltaY = startY > endY ? Math.round( startY-endY ) : Math.round( endY-startY )
+      // const deltaY = startY > endY ? Math.round( startY-endY ) : Math.round( endY-startY )
 
       if(startX === null || endX === null) return;
       if(startY === null || endY === null) return;

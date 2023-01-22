@@ -1,3 +1,4 @@
+import React from 'react';
 import s from './menu.module.css'
 import MenuItem from './menuitem'
 

@@ -5,9 +5,10 @@ import Artist from './artist'
 import Album from './album'
 import Title from './title'
 import Songprogress from './songprogress'
+import React from 'react'
 
 interface Props {
-        artist: string | null;
+        artist: string ;
         state: string | null;
         service: string | null;
         artwork: string | null; 
