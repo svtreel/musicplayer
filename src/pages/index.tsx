@@ -3,13 +3,13 @@ import Playercontainer from '../../components/basic/playercontainer'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
 
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function Home() {
+export default function Home( ) {
 
         const shutDownWhenStopSeconds = 120
 
-        const [data, setdata] = useState(
+        const [ data, setdata ] = useState(
           {
                 artist: "n/A",
                 image: "n/A",
@@ -25,37 +25,37 @@ export default function Home() {
                 volume: "n/A"
                 }
         )
-        const [isPause, setisPause] = useState(false)
-        const [topmarginPlayercontainer, setTopmarginPlayercontainer] = useState("0rem")
-        const [loading, setloading] = useState(true)
-        const [progress, setProgress] = useState(0)
-        const [lastimageanalysed, setlastimageanalysed] = useState()
-        const [onswitch, setonswitch] = useState( false )
-        const [menuitem, setMenuitem] = useState( "music" )
-        const [showStopOverlay, setShowStopOverlay] = useState( false )
+        const [ isPause, setisPause ] = useState( false )
+        const [ topmarginPlayercontainer, setTopmarginPlayercontainer ] = useState( "0rem" )
+        const [ loading, setloading ] = useState( true )
+        const [ progress, setProgress ] = useState(0)
+        const [ lastimageanalysed, setlastimageanalysed] = useState( )
+        const [ onswitch, setonswitch ] = useState( false )
+        const [ menuitem, setMenuitem ] = useState( "music" )
+        const [ showStopOverlay, setShowStopOverlay ] = useState( false )
         // const [topMenu, setTopMenu] = useState( false )
-        const [isBeingChecked, setIsBeingChecked] = useState( false )
+        const [ isBeingChecked, setIsBeingChecked ] = useState( false )
         // const [resetBackground, setresetBackground] = useState( false )
-        const [colourPalette, setColourPalette] = useState()
-        const [swipeAnimation, setSwipeAnimation] = useState(
+        const [ colourPalette, setColourPalette ] = useState( )
+        const [ swipeAnimation, setSwipeAnimation ] = useState(
                 {
                   direction: "",
                   delta: 0
                 }
         )
-        const [waitduration, setwaitduration] = useState( 1200 )
-        const [countShutdown, setCountShutdown] = useState( 0 )
-        const [shutDown, setShutdown] = useState( false )
+        const [ waitduration, setwaitduration ] = useState( 1200 )
+        const [ countShutdown, setCountShutdown ] = useState( 0 )
+        const [ shutDown, setShutdown ] = useState( false )
 
-        useEffect(() => {
+        useEffect( ( ) => {
                 (
-                        async () => {
-                                if (shutDown) {
+                        async ( ) => {
+                                if ( shutDown ) {
                                         const url = "/api/shutdown";
                                         const r = await fetch( url );
 
                                 }
-                                if (!shutDown) {
+                                if ( !shutDown ) {
                                         const url = "/api/turnon";
                                         const r = await fetch( url );
 
@@ -72,7 +72,7 @@ export default function Home() {
         }
 
         useEffect(() => {
-                const refreshInterval = setInterval(async () => {
+                const refreshInterval = setInterval(async ( ) => {
 
                         if ( menuitem === null ) {
 
@@ -90,7 +90,7 @@ export default function Home() {
 
                                         const url = "/api/getmeta";
                                         const r = await fetch( url );
-                                        const playerdata = await r.json();
+                                        const playerdata = await r.json( );
 
                                         if ( playerdata.state === "pause" ){
                                                 setisPause( true )
@@ -102,7 +102,7 @@ export default function Home() {
 
                                         if ( playerdata.state === "stop" ) {
                                                 setCountShutdown( countShutdown + 1 )
-                                        } else {
+                                        } else {
                                                 if ( playerdata.state !== "pause" ) {
                                                         setCountShutdown( 0 )
                                                 }     
@@ -123,93 +123,94 @@ export default function Home() {
 
                                         setdata(playerdata);
 
-                                        const calcPercentProgress = () => {
+                                        const calcPercentProgress = ( ) => {
                                                 if ( playerdata.length ) {
-                                                        return Math.round(( 100 / playerdata.length) * playerdata.seconds + 1 );
+                                                        return Math.round(( 100 / playerdata.length ) * playerdata.seconds + 1 );
                                                 } else {
                                                         return 100;
                                                 }
                                         }
+
                                         setonswitch( true )
-                                        setProgress( calcPercentProgress() ) 
+                                        setProgress( calcPercentProgress( ) ) 
                                         setIsBeingChecked( false )
                                         // setresetBackground( false )
                                         setloading( false )
                                 }
                         }
-                }, waitduration);
+                }, waitduration );
                 return () => clearInterval( refreshInterval );
         }, );
 
         class ColourPalette {
             public colors: any;
-            constructor() {
-                this.colors = {};
+            constructor( ) {
+                this.colors = { };
             }
 
             appendValueToList( type: string, value: any ) {
                 this.colors[ type ] = value;
             }
 
-            getColors() {
+            getColors( ) {
                 return this.colors;
             }
         }
 
-        const myPalette = new ColourPalette();
+        const myPalette = new ColourPalette( );
 
         const makePalette = ( palette ) => {
                 try{
-                        const vibrantprocessed = 'rgba(' + palette.Vibrant._rgb[0] + ', ' + palette.Vibrant._rgb[1] + ', ' + palette.Vibrant._rgb[2] + ', 100)'
+                        const vibrantprocessed = 'rgba(' + palette.Vibrant._rgb[ 0 ] + ', ' + palette.Vibrant._rgb[ 1 ] + ', ' + palette.Vibrant._rgb[ 2 ] + ', 100 )'
                         myPalette.appendValueToList( "vibrant", vibrantprocessed )
-                }catch(e){null}
+                }catch( e ){ null }
                 try{
-                        const darkVibrantProcessed = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 100)'
+                        const darkVibrantProcessed = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 100 )'
                         myPalette.appendValueToList("darkvibrant", darkVibrantProcessed )
-                }catch(e){null}
+                }catch( e ){ null }
                 try{
-                        const darkVibrantProcessedLIGHT = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 0.5)'
+                        const darkVibrantProcessedLIGHT = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 0.5 )'
                         myPalette.appendValueToList( "darkvibrantlight", darkVibrantProcessedLIGHT )
-                }catch(e){null}
+                }catch( e ){ null }
                 try{
-                        const lightMutedProcessed = 'rgba(' + palette.LightMuted._rgb[0] + ', ' + palette.LightMuted._rgb[1] + ', ' + palette.LightMuted._rgb[2] + ', 100)'
+                        const lightMutedProcessed = 'rgba(' + palette.LightMuted._rgb[ 0 ] + ', ' + palette.LightMuted._rgb[ 1 ] + ', ' + palette.LightMuted._rgb[ 2 ] + ', 100 )'
                         myPalette.appendValueToList( "lightmuted", lightMutedProcessed )
-                }catch(e){null}
+                }catch( e ){ null }
                 try{
-                        const mutedProcessed = 'rgba(' + palette.Muted._rgb[0] + ', ' + palette.Muted._rgb[1] + ', ' + palette.Muted._rgb[2] + ', 100)'
+                        const mutedProcessed = 'rgba(' + palette.Muted._rgb[ 0 ] + ', ' + palette.Muted._rgb[ 1 ] + ', ' + palette.Muted._rgb[ 2 ] + ', 100 )'
                         myPalette.appendValueToList( "muted", mutedProcessed )
-                }catch(e){null}
-                setColourPalette(myPalette.colors)
+                }catch( e ){ null }
+                setColourPalette( myPalette.colors )
         }
    
-        const handleClickPause = () => {
-                setisPause(true)
-                fetch("http://192.168.0.222:11000/Pause")
+        const handleClickPause = ( ) => {
+                setisPause( true )
+                fetch( "http://192.168.0.222:11000/Pause" )
         };
         const handleClickPlay = ( event ) => {
                 setisPause( false )
                 fetch( "http://192.168.0.222:11000/Play" )
         }
-        function handleLeftSwipe() {
+        function handleLeftSwipe( ) {
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Next" )
         }
-        function handleRightSwipe() {
+        function handleRightSwipe( ) {
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Previous" )
         }
-        function handleUpSwipe() {
+        function handleUpSwipe( ) {
                 // setTopMenu( false )
-                setTopmarginPlayercontainer("0rem")
+                setTopmarginPlayercontainer( "0rem" )
         }
-        function handleDownSwipe() {
+        function handleDownSwipe( ) {
                 // setTopMenu( true )
-                setTopmarginPlayercontainer("10rem")
+                setTopmarginPlayercontainer( "10rem" )
         }
 
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, setSwipeAnimation );
 
 
         return <>
-                { showStopOverlay === true &&<>
+                { showStopOverlay === true &&< >
                         <div 
                                 className = { "overlay" }
                                 onClick = { ( e ) => {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
@@ -230,7 +231,7 @@ export default function Home() {
 
                 </> } */}
                 { loading == true && <>
-                        <Waitscreen/>
+                        <Waitscreen />
                 </> }
 
                 { loading == false && colourPalette != undefined && data.quality != "n/A" && <>

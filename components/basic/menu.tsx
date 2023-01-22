@@ -9,7 +9,7 @@ interface Props {
 export default function Component( props: Props ) {
 
         return <>
-            <div className={s.container}>
+            <div className={ s.container }>
                 <MenuItem
                     label = "Music"
                     icon = "nightlife"

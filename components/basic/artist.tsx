@@ -9,7 +9,7 @@ interface Props {
 export default function Component( props: Props ) {
 
         const style = props.colour
-                ? {color: props.colour}
+                ? { color: props.colour }
                 : { }
 
         return <>

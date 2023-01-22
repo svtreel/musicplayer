@@ -1,5 +1,4 @@
 import s from './contentright.module.css'
-import Artwork from './artwork'
 import Loader from './loader'
 import Artist from './artist'
 import Album from './album'
@@ -32,7 +31,9 @@ interface Props {
 export default function Component( props: Props ) {
 
         return <>
-                <div className = {s.container}>
+                <div 
+                        className = { s.container }>
+
                         <Title 
                                 text            = { props.title }
                                 colour          = { props.vibrant ? props.vibrant : null }
@@ -46,7 +47,7 @@ export default function Component( props: Props ) {
                                 <Album 
                                         text    = { props.album }
                                 />
-                        </>}
+                        </> }
                         { props.progress <= 100 && props.state != "connecting" && props.service != "TuneIn" && <> 
                                 <Songprogress 
                                         progress         = { props.progress } 
@@ -60,10 +61,10 @@ export default function Component( props: Props ) {
                                         songlength       = { props.songLength }
                                         tidal            = { props.service != "TidalConnect" ? true : false }
                                 />
-                        </>}
-                        {props.state == "connecting" && <> 
+                        </> }
+                        { props.state == "connecting" && <> 
                                 <Loader/>
-                        </>}
+                        </> }
                 </div>
         </>
 }
