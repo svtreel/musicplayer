@@ -72,7 +72,7 @@ export default function Home( ) {
                 return showVolumeChange( data.volume )
         }, [  ] )
 
-        function showVolumeChange( vol ) {
+        function showVolumeChange( vol: number ) {
 
         }
         
