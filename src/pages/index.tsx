@@ -228,7 +228,7 @@ export default function Home( ) {
         return <>
                 { volumeOverlay == true && loading == false && <> 
                         <Volumeindicator
-                                volume = { volumme }
+                                volume = { volume }
                                 action = { setVolumeOverlay }/>
                 </>}
                 { showStopOverlay === true &&< >
