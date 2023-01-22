@@ -4,7 +4,6 @@ import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
 
 import React, {useState, useEffect} from 'react'
-import { Palette } from 'node-vibrant/lib/color';
 
 export default function Home() {
 
@@ -34,9 +33,9 @@ export default function Home() {
         const [onswitch, setonswitch] = useState( false )
         const [menuitem, setMenuitem] = useState( "music" )
         const [showStopOverlay, setShowStopOverlay] = useState( false )
-        const [topMenu, setTopMenu] = useState( false )
+        // const [topMenu, setTopMenu] = useState( false )
         const [isBeingChecked, setIsBeingChecked] = useState( false )
-        const [resetBackground, setresetBackground] = useState( false )
+        // const [resetBackground, setresetBackground] = useState( false )
         const [colourPalette, setColourPalette] = useState()
         const [swipeAnimation, setSwipeAnimation] = useState(
                 {
@@ -93,7 +92,7 @@ export default function Home() {
                                         const r = await fetch( url );
                                         const playerdata = await r.json();
 
-                                        if (playerdata.state === "pause"){
+                                        if ( playerdata.state === "pause" ){
                                                 setisPause( true )
                                                 setCountShutdown( countShutdown + 0.25 )
                                         } else {
@@ -101,10 +100,10 @@ export default function Home() {
                                                 setShutdown( false )
                                         }
 
-                                        if (playerdata.state === "stop") {
+                                        if ( playerdata.state === "stop" ) {
                                                 setCountShutdown( countShutdown + 1 )
                                         } else {
-                                                if (playerdata.state !== "pause") {
+                                                if ( playerdata.state !== "pause" ) {
                                                         setCountShutdown( 0 )
                                                 }     
                                         }
@@ -198,11 +197,11 @@ export default function Home() {
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Previous" )
         }
         function handleUpSwipe() {
-                setTopMenu( false )
+                // setTopMenu( false )
                 setTopmarginPlayercontainer("0rem")
         }
         function handleDownSwipe() {
-                setTopMenu( true )
+                // setTopMenu( true )
                 setTopmarginPlayercontainer("10rem")
         }
 
