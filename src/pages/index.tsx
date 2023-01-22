@@ -50,7 +50,7 @@ export default function Home( ) {
         const [ onswitch, setonswitch ] = useState( false )
         const [ menuitem, setMenuitem ] = useState( "music" )
         const [ showStopOverlay, setShowStopOverlay ] = useState( false )
-        const [topMenu, setTopMenu] = useState( false )
+        const [ topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
         // const [resetBackground, setresetBackground] = useState( false )
         const [ colourPalette, setColourPalette ] = useState( )
@@ -63,6 +63,7 @@ export default function Home( ) {
         const [ waitduration, setwaitduration ] = useState( 1200 )
         const [ countShutdown, setCountShutdown ] = useState( 0 )
         const [ shutDown, setShutdown ] = useState( false )
+        const [ volumeOverlay, setVolumeOverlay ] = useState( false )
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
@@ -70,10 +71,10 @@ export default function Home( ) {
 
         const volume = useMemo( ( ) => { 
                 return showVolumeChange( data.volume )
-        }, [  ] )
+        }, [ data.volume ] )
 
         function showVolumeChange( vol: number ) {
-
+                setVolumeOverlay( true )
         }
         
         const updateImageOnDemand = useMemo( ( ) => { 
@@ -227,9 +228,11 @@ export default function Home( ) {
 
 
         return <>
-                {/* <Volumeindicator
-                        volume = {20}/>
-                         */}
+                { volumeOverlay == true && loading == false && <> 
+                        <Volumeindicator
+                                volume = { data.volume }
+                                action = { setVolumeOverlay }/>
+                </>}
                 { showStopOverlay === true &&< >
                         <div 
                                 className = { "overlay" }
