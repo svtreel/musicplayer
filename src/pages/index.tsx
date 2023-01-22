@@ -64,17 +64,19 @@ export default function Home( ) {
         const [ countShutdown, setCountShutdown ] = useState( 0 )
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
+        const [ volumeValue, setVolumeValue ] = useState( 0 )
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
         }, [ data.seconds, data.length ] )
 
-        const volume = useMemo( ( ) => { 
+        const volumeUpdate = useMemo( ( ) => { 
                 return showVolumeChange( data.volume )
         }, [ data.volume ] )
 
         function showVolumeChange( vol: number ) {
                 setVolumeOverlay( true )
+                setVolumeValue( vol )
         }
         
         const updateImageOnDemand = useMemo( ( ) => { 
@@ -228,7 +230,7 @@ export default function Home( ) {
         return <>
                 { volumeOverlay == true && loading == false && <> 
                         <Volumeindicator
-                                volume = { volume }
+                                volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
                 </>}
                 { showStopOverlay === true &&< >
