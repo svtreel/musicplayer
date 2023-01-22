@@ -79,7 +79,7 @@ export default function Component( props: Props ) {
                                                 service          = { props.data.service }
                                                 serviceIcon      = { props.data.serviceIcon }
                                         /> 
-                                </>}
+                                </>} 
                                 <Contentleft
                                                 service           = { props.data.service }
                                                 serviceIcon       = { props.data.serviceIcon }
@@ -90,10 +90,10 @@ export default function Component( props: Props ) {
                                                 action_play       = { props.action_play}
                                 />
                                 <Contentright
-                                                artist            = { props.data.artist ? props.data.artist.toString() : "null" }
-                                                title             = { props.data.title1 ? props.data.title1.toString() : "null" }
-                                                title2            = { props.data.title2 ? props.data.title2.toString() : "null" }
-                                                album             = { props.data.title3 ? props.data.title3.toString() : "null" }
+                                                artist            = { props.data.artist ? props.data.artist.toString() : "" }
+                                                title             = { props.data.title1 ? props.data.title1.toString() : "" }
+                                                title2            = { props.data.title2 ? props.data.title2.toString() : "" }
+                                                album             = { props.data.title3 ? props.data.title3.toString() : "" }
                                                 service           = { props.data.service }
                                                 state             = { props.data.state }
                                                 serviceIcon       = { props.data.serviceIcon }
