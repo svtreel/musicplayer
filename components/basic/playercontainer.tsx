@@ -79,7 +79,7 @@ export default function Component( props: Props ) {
                                                 service          = { props.data.service }
                                                 serviceIcon      = { props.data.serviceIcon }
                                         /> 
-                                </>} 
+                                </>}  
                                 <Contentleft
                                                 service           = { props.data.service }
                                                 serviceIcon       = { props.data.serviceIcon }
