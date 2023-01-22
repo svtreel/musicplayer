@@ -37,11 +37,11 @@ interface Props {
         isPause: boolean;
         action_pause: Function;
         action_play: Function;
-        topmarginPlayercontainer: string;
+        increasedTopmarginPlayercontainer: boolean;
 }
 
 export default function Component( props: Props ) {
-        
+
         const factor = 25
         const cut = props.swipeAnimation.delta <= 200 ? props.swipeAnimation.delta : 200 
         const perspective = props.swipeAnimation.delta != 0 ? 600-cut : 2000
@@ -67,12 +67,13 @@ export default function Component( props: Props ) {
                 return animationDirection_style
         }
 
+        const topmargin_init = props.increasedTopmarginPlayercontainer === true ? s.increasedMargin : s.notIncreasedMargin
+
         return <>
                 { props.data && <>
-                        <div className={ s.container } 
+                        <div className = {  s.container +" "+ topmargin_init  } 
                                 style = {{
-                                        transform: animationDirection_init(),
-                                        marginTop: props.topmarginPlayercontainer
+                                        transform: animationDirection_init()
                                 }}
                         >
                                 { props.data && props.data.service && props.data.service !== "Capture" && <>

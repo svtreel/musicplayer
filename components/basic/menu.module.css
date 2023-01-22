@@ -1,4 +1,4 @@
-.container {
+.menucontainer {
     display:flex;
     width:100%; 
     margin-top:0rem;
@@ -7,4 +7,36 @@
     flex-direction: row;
     align-content:stretch;
     z-index:99999999;
+    justify-content: center;
+    background-color:rgba(0,0,0,0.5);
+}
+.content {
+    position:absolute;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    margin-top:8rem;
+    padding:1rem;
+    margin-left:5rem;
+    display:inline;
+    border-radius: 20px;
+}
+.content p {
+    font-weight:800;
+}
+.selectable{
+    width:45%;
+    display:inline-flex;
+    margin-left:0rem;
+    align-items: center;
+    margin-right:1rem;
+}
+
+.selectableImage{
+    margin:2px;
+    margin-right:1rem;
+    width:60px;
+    border-radius: 10px;
+    height:60px;
+    z-index: 88888;
 }

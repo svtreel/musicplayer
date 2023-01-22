@@ -14,12 +14,9 @@ export default function Component( props: Props ) {
 
         return <> 
             <div className={ s.container } onClick = { ( e ) => props.action( props.label ) }>
-                {/* <div className="material-icons-outlined"
+                <div className="material-icons-outlined"
                         style = {{ border: colour }}>
                     { props.icon }
-                </div> */}
-                <div>
-                    { props.label }
                 </div>
             </div>
         </>

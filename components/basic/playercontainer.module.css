@@ -1,9 +1,15 @@
-.container{
+.container {
         width:100%;
-        top:1rem;
+        top:0rem;
         margin-top:0rem;
         display:flex;
         height:100%;
         position:relative;
         transition-duration: 0.2s;
+}
+.increasedMargin {
+        margin-top:10rem;
+}
+.notIncreasedMargin {
+        margin-top:0rem;
 }

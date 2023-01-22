@@ -2,20 +2,20 @@
     display:flex;
     width:6rem;
     height:6rem;
-    margin:2rem;
+    margin:1rem;
     border-radius: 30px;
     cursor:pointer;
     align-items: center;
     align-content: center;
     justify-content: center;
+    text-align: center;
     box-sizing: border-box;
 }
 .container div {
-    
-    border-radius: 30px;
-    width:6.5rem;
-    height:6.5rem;
-    padding:calc(2rem - 4px);
-    font-size:2.5rem;
+    border-radius: 40px;
+    width: 27rem;
+    height: 4rem;
+    padding: calc(0.75rem - 3px);
+    font-size: 2.5rem;
     font-weight: 100;
 }

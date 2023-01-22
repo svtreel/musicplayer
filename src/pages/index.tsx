@@ -5,6 +5,7 @@ import Vibrant from 'node-vibrant';
 
 import React, { useState, useEffect, useMemo } from 'react'
 import { ImageSource } from 'node-vibrant/lib/typing';
+import Menu from '../../components/basic/menu';
 
 export default function Home( ) {
 
@@ -27,13 +28,13 @@ export default function Home( ) {
                 }
         )
         const [ isPause, setisPause ] = useState( false )
-        const [ topmarginPlayercontainer, setTopmarginPlayercontainer ] = useState( "0rem" )
+        const [ increasedTopmarginPlayercontainer, setIncreasedTopmarginPlayercontainer ] = useState( false )
         const [ loading, setloading ] = useState( true )
         const [ lastimageanalysed, setlastimageanalysed] = useState( )
         const [ onswitch, setonswitch ] = useState( false )
         const [ menuitem, setMenuitem ] = useState( "music" )
         const [ showStopOverlay, setShowStopOverlay ] = useState( false )
-        // const [topMenu, setTopMenu] = useState( false )
+        const [topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
         // const [resetBackground, setresetBackground] = useState( false )
         const [ colourPalette, setColourPalette ] = useState( )
@@ -80,7 +81,7 @@ export default function Home( ) {
                 })
         }
 
-        useEffect(() => {
+        useEffect( ( ) => {
                 const refreshInterval = setInterval(async ( ) => {
 
                         if ( menuitem === null ) {
@@ -203,12 +204,12 @@ export default function Home( ) {
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Previous" )
         }
         function handleUpSwipe( ) {
-                // setTopMenu( false )
-                setTopmarginPlayercontainer( "0rem" )
+                setTopMenu( false )
+                setIncreasedTopmarginPlayercontainer( false )
         }
         function handleDownSwipe( ) {
-                // setTopMenu( true )
-                setTopmarginPlayercontainer( "10rem" )
+                setTopMenu( true )
+                setIncreasedTopmarginPlayercontainer( true )
         }
 
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, setSwipeAnimation );
@@ -221,7 +222,7 @@ export default function Home( ) {
                                 onClick = { ( e ) => {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
-                {/* { topMenu === true && <> 
+                { topMenu === true && <> 
                         <Menu
                                 action = { setMenuitem }
                         />
@@ -234,7 +235,7 @@ export default function Home( ) {
                                 className = { "overlay" }>
                         </div>
 
-                </> } */}
+                </> }
                 { loading == true && <>
                         <Waitscreen />
                 </> }
@@ -251,7 +252,7 @@ export default function Home( ) {
                                 action_pause      = { handleClickPause }
                                 action_play       = { handleClickPlay }
                                 swipeAnimation    = { swipeAnimation }
-                                topmarginPlayercontainer = { topmarginPlayercontainer }
+                                increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />
                 </>}                    
         </>

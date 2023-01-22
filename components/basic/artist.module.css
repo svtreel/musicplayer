@@ -1,11 +1,10 @@
 .artist{
-        margin-top:2rem; 
+        margin-top:1rem; 
         font-size:1.9rem;
         line-height:2rem;
         min-height:2.3rem;
         max-height:2.2rem;
-        margin-bottom:1rem;
-        /* color:#ccc; */
+        margin-bottom:0rem;
         white-space: nowrap;
         filter: brightness(100%);
         font-weight: 400;
