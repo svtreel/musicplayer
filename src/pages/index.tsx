@@ -251,7 +251,7 @@ export default function Home( ) {
                                 colourPalette     = { colourPalette }
                                 action_pause      = { handleClickPause }
                                 action_play       = { handleClickPlay }
-                                swipeAnimation    = { swipeAnimation }
+                                // swipeAnimation    = { swipeAnimation }
                                 increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />
                 </>}                    
