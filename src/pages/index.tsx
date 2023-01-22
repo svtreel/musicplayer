@@ -152,8 +152,6 @@ export default function Home() {
                 return () => clearInterval( refreshInterval );
         }, );
 
-
-
         class ColourPalette {
             public colors: any;
             constructor() {
