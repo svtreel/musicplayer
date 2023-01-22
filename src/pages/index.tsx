@@ -40,7 +40,7 @@ export default function Home( ) {
                         title1: "n/A",
                         title2: "n/A",
                         title3: "n/A",
-                        volume: "n/A"
+                        volume: 0
                         }
                 )
         const [ isPause, setisPause ] = useState( false )
