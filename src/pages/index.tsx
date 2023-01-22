@@ -223,17 +223,17 @@ export default function Home() {
 
         return <>
 
-<link
+{/* <link
                         href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
                         rel="stylesheet"
-            />
+            /> */}
                 { showStopOverlay === true &&<>
                         <div 
                                 className = { "overlay" }
                                 onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
-                {/* { topMenu === true && <> 
+                { topMenu === true && <> 
                         <Menu
                                 action = { setMenuitem }
                         />
@@ -246,7 +246,7 @@ export default function Home() {
                                 className = { "overlay" }>
                         </div>
 
-                </> } */}
+                </> }
                 { loading == true && <>
                         <Waitscreen/>
                 </> }
