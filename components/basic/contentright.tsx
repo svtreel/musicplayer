@@ -48,7 +48,11 @@ export default function Component( props: Props ) {
                                         text    = { props.album }
                                 />
                         </> }
-                        { props.progress <= 100 && props.state != "connecting" && props.service != "TuneIn" && <> 
+                        { props.progress <= 100 && 
+                                props.state != "connecting" && 
+                                props.service != "TuneIn" && 
+                                props.service != "Capture" && <> 
+
                                 <Songprogress 
                                         progress         = { props.progress } 
                                         color            = { null }

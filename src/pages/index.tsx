@@ -7,26 +7,41 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { ImageSource } from 'node-vibrant/lib/typing';
 import Menu from '../../components/basic/menu';
 
+class ColourPalette {
+        public colors: any;
+        constructor( ) {
+            this.colors = { };
+        }
+
+        appendValueToList( type: string, value: any ) {
+            this.colors[ type ] = value;
+        }
+
+        getColors( ) {
+            return this.colors;
+        }
+}
+
 export default function Home( ) {
 
         const shutDownWhenStopSeconds = 120
 
         const [ data, setdata ] = useState(
-          {
-                artist: "n/A",
-                image: "n/A",
-                length: 0,
-                quality: "n/A",
-                seconds: 0,
-                service: "n/A",
-                serviceIcon: "n/A",
-                state: "n/A",
-                title1: "n/A",
-                title2: "n/A",
-                title3: "n/A",
-                volume: "n/A"
-                }
-        )
+                {
+                        artist: "n/A",
+                        image: "n/A",
+                        length: 0,
+                        quality: "n/A",
+                        seconds: 0,
+                        service: "n/A",
+                        serviceIcon: "n/A",
+                        state: "n/A",
+                        title1: "n/A",
+                        title2: "n/A",
+                        title3: "n/A",
+                        volume: "n/A"
+                        }
+                )
         const [ isPause, setisPause ] = useState( false )
         const [ increasedTopmarginPlayercontainer, setIncreasedTopmarginPlayercontainer ] = useState( false )
         const [ loading, setloading ] = useState( true )
@@ -50,7 +65,15 @@ export default function Home( ) {
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
-        }, [ data.seconds ] )
+        }, [ data.seconds, data.length ] )
+
+        const volume = useMemo( ( ) => { 
+                return showVolumeChange( data.volume )
+        }, [  ] )
+
+        function showVolumeChange() {
+                
+        }
         
         const updateImageOnDemand = useMemo( ( ) => { 
                 const i = data.image !== "n/A" ? data.image : ""
@@ -74,12 +97,12 @@ export default function Home( ) {
                 )()
         }, [ shutDown ])
 
-        const resetAnimationStyle = ( ) => {
-                setSwipeAnimation({
-                        direction: "",
-                        delta: 0
-                })
-        }
+        // const resetAnimationStyle = ( ) => {
+        //         setSwipeAnimation({
+        //                 direction: "",
+        //                 delta: 0
+        //         })
+        // }
 
         useEffect( ( ) => {
                 const refreshInterval = setInterval(async ( ) => {
@@ -103,26 +126,25 @@ export default function Home( ) {
                                         const playerdata = await r.json( );
 
                                         if ( playerdata.service === "Capture" ){
-                                                setCountShutdown( countShutdown + 5 )
-                                        } else {
-                                                setShutdown( false )
+                                                setCountShutdown( countShutdown + 12 )
                                         }
 
                                         if ( playerdata.state === "pause" ){
                                                 setisPause( true )
                                                 setCountShutdown( countShutdown + 0.25 )
-                                        } else {
-                                                setisPause( false )
-                                                setShutdown( false )
                                         }
 
                                         if ( playerdata.state === "stop" ) {
                                                 setCountShutdown( countShutdown + 1 )
-                                        } else {
-                                                if ( playerdata.state !== "pause" ) {
-                                                        setCountShutdown( 0 )
-                                                }     
                                         }
+
+                                        if ( playerdata.state === "pause" && playerdata.service === "Capture" && playerdata.state === "stop" ){
+                                                setisPause( false )
+                                                setShutdown( false )
+                                                setCountShutdown( 0 )
+                                        }
+
+                                        console.log(countShutdown)
 
                                         countShutdown >= shutDownWhenStopSeconds 
                                                 ? setShowStopOverlay( true ) 
@@ -131,34 +153,18 @@ export default function Home( ) {
                                                 ? setShutdown( true ) 
                                                 : setShutdown( false )
 
-                                        setdata(playerdata);
-
-                                        
-
+                                        setdata( playerdata );
                                         setonswitch( true )
                                         setIsBeingChecked( false )
-                                        // setresetBackground( false )
                                         setloading( false )
+                                        // setresetBackground( false )
                                 }
                         }
                 }, waitduration );
                 return () => clearInterval( refreshInterval );
         }, );
 
-        class ColourPalette {
-            public colors: any;
-            constructor( ) {
-                this.colors = { };
-            }
-
-            appendValueToList( type: string, value: any ) {
-                this.colors[ type ] = value;
-            }
-
-            getColors( ) {
-                return this.colors;
-            }
-        }
+        
 
         const myPalette = new ColourPalette( );
 
