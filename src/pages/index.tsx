@@ -6,6 +6,7 @@ import Vibrant from 'node-vibrant';
 import React, { useState, useEffect, useMemo } from 'react'
 import { ImageSource } from 'node-vibrant/lib/typing';
 import Menu from '../../components/basic/menu';
+import Volumeindicator from '../../components/basic/volumeindicator';
 
 class ColourPalette {
         public colors: any;
@@ -71,8 +72,8 @@ export default function Home( ) {
                 return showVolumeChange( data.volume )
         }, [  ] )
 
-        function showVolumeChange() {
-                
+        function showVolumeChange( vol ) {
+
         }
         
         const updateImageOnDemand = useMemo( ( ) => { 
@@ -164,8 +165,6 @@ export default function Home( ) {
                 return () => clearInterval( refreshInterval );
         }, );
 
-        
-
         const myPalette = new ColourPalette( );
 
         const makePalette = ( palette ) => {
@@ -228,6 +227,9 @@ export default function Home( ) {
 
 
         return <>
+                {/* <Volumeindicator
+                        volume = {20}/>
+                         */}
                 { showStopOverlay === true &&< >
                         <div 
                                 className = { "overlay" }
