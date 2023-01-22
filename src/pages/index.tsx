@@ -3,7 +3,8 @@ import Playercontainer from '../../components/basic/playercontainer'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+import { ImageSource } from 'node-vibrant/lib/typing';
 
 export default function Home( ) {
 
@@ -15,7 +16,7 @@ export default function Home( ) {
                 image: "n/A",
                 length: 0,
                 quality: "n/A",
-                seconds: "n/A",
+                seconds: 0,
                 service: "n/A",
                 serviceIcon: "n/A",
                 state: "n/A",
@@ -28,7 +29,6 @@ export default function Home( ) {
         const [ isPause, setisPause ] = useState( false )
         const [ topmarginPlayercontainer, setTopmarginPlayercontainer ] = useState( "0rem" )
         const [ loading, setloading ] = useState( true )
-        const [ progress, setProgress ] = useState(0)
         const [ lastimageanalysed, setlastimageanalysed] = useState( )
         const [ onswitch, setonswitch ] = useState( false )
         const [ menuitem, setMenuitem ] = useState( "music" )
@@ -47,6 +47,15 @@ export default function Home( ) {
         const [ countShutdown, setCountShutdown ] = useState( 0 )
         const [ shutDown, setShutdown ] = useState( false )
 
+        const progress = useMemo( ( ) => { 
+                return updateProgressCalculation( data.length, data.seconds )
+        }, [ data.seconds ] )
+        
+        const updateImageOnDemand = useMemo( ( ) => { 
+                const i = data.image !== "n/A" ? data.image : ""
+                return updatePaletteFromImage( i )
+        }, [ data.image ] )
+
         useEffect( ( ) => {
                 (
                         async ( ) => {
@@ -62,7 +71,7 @@ export default function Home( ) {
                                 }
                         }
                 )()
-        }, [shutDown])
+        }, [ shutDown ])
 
         const resetAnimationStyle = ( ) => {
                 setSwipeAnimation({
@@ -115,24 +124,11 @@ export default function Home( ) {
                                                 ? setShutdown( true ) 
                                                 : setShutdown( false )
 
-                                        if ( lastimageanalysed !== playerdata.image && playerdata.state != "connecting" ) {
-                                                const v = new Vibrant( playerdata.image );
-                                                v.getPalette(( err, palette ) => makePalette( palette ));
-                                                setlastimageanalysed( playerdata.image );
-                                        }
-
                                         setdata(playerdata);
 
-                                        const calcPercentProgress = ( ) => {
-                                                if ( playerdata.length ) {
-                                                        return Math.round(( 100 / playerdata.length ) * playerdata.seconds + 1 );
-                                                } else {
-                                                        return 100;
-                                                }
-                                        }
+                                        
 
                                         setonswitch( true )
-                                        setProgress( calcPercentProgress( ) ) 
                                         setIsBeingChecked( false )
                                         // setresetBackground( false )
                                         setloading( false )
@@ -181,6 +177,15 @@ export default function Home( ) {
                         myPalette.appendValueToList( "muted", mutedProcessed )
                 }catch( e ){ null }
                 setColourPalette( myPalette.colors )
+        }
+
+        function updatePaletteFromImage ( image: string ) {
+                const v = new Vibrant( image );
+                v.getPalette(( err, palette ) => makePalette( palette ));
+        }
+
+        function updateProgressCalculation ( lengthOfSong: number, secondsOfSong: number ) {
+                return Math.round(( 100 / lengthOfSong ) * secondsOfSong + 1 );
         }
    
         const handleClickPause = ( ) => {

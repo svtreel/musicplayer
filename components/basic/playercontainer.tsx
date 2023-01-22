@@ -6,11 +6,11 @@ import React from 'react'
 
 interface Props {
         data: {
-                artist: string | boolean | null,
+                artist: string,
                 image: string | null,
                 length: number,
                 quality: string | null,
-                seconds: string | null,
+                seconds: number,
                 service: string | null,
                 serviceIcon: string,
                 state: string | null,
@@ -41,6 +41,7 @@ interface Props {
 }
 
 export default function Component( props: Props ) {
+        
         const factor = 25
         const cut = props.swipeAnimation.delta <= 200 ? props.swipeAnimation.delta : 200 
         const perspective = props.swipeAnimation.delta != 0 ? 600-cut : 2000
