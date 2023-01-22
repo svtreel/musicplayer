@@ -233,7 +233,7 @@ export default function Home() {
                                 onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
-                { topMenu === true && <> 
+                {/* { topMenu === true && <> 
                         <Menu
                                 action = { setMenuitem }
                         />
@@ -246,7 +246,7 @@ export default function Home() {
                                 className = { "overlay" }>
                         </div>
 
-                </> }
+                </> } */}
                 { loading == true && <>
                         <Waitscreen/>
                 </> }
