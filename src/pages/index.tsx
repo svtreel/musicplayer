@@ -1,13 +1,10 @@
-import Loader from '../../components/basic/loader'
 import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
-import Head from 'next/head'
-import Menu from '../../components/basic/menu'
-
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
 
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
+import { Palette } from 'node-vibrant/lib/color';
 
 export default function Home() {
 
@@ -48,7 +45,6 @@ export default function Home() {
                 }
         )
         const [waitduration, setwaitduration] = useState( 1200 )
-        const [waitdurationUntilShutDown, setwaitdurationUntilShutDown] = useState( shutDownWhenStopSeconds )
         const [countShutdown, setCountShutdown] = useState( 0 )
         const [shutDown, setShutdown] = useState( false )
 
@@ -58,18 +54,18 @@ export default function Home() {
                                 if (shutDown) {
                                         const url = "/api/shutdown";
                                         const r = await fetch( url );
-                                        setwaitduration(1200)
+
                                 }
                                 if (!shutDown) {
                                         const url = "/api/turnon";
                                         const r = await fetch( url );
-                                        setwaitduration(10000)
+
                                 }
                         }
                 )()
         }, [shutDown])
 
-        const resetAnimationStyle = ( direction: string ) => {
+        const resetAnimationStyle = ( ) => {
                 setSwipeAnimation({
                         direction: "",
                         delta: 0
@@ -84,10 +80,10 @@ export default function Home() {
                         } else {
                                 console.log( "Updating..." )
 
-                                swipeAnimation.direction == "right" ? resetAnimationStyle("right") : null
-                                swipeAnimation.direction == "left" ? resetAnimationStyle("left") : null
-                                swipeAnimation.direction == "up" ? resetAnimationStyle("up") : null
-                                swipeAnimation.direction == "down" ? resetAnimationStyle("down") : null
+                                swipeAnimation.direction == "right" ? resetAnimationStyle() : null
+                                swipeAnimation.direction == "left" ? resetAnimationStyle() : null
+                                swipeAnimation.direction == "up" ? resetAnimationStyle() : null
+                                swipeAnimation.direction == "down" ? resetAnimationStyle() : null
                                 
                                 if ( isBeingChecked === false ) {
                                         setIsBeingChecked( true );
@@ -112,12 +108,7 @@ export default function Home() {
                                                         setCountShutdown( 0 )
                                                 }     
                                         }
-                                        // countShutdown >= shutDownWhenStopSeconds 
-                                        //         ? console.log("showing overlay") 
-                                        //         : null
-                                        // countShutdown >= shutDownWhenStopSeconds * 2
-                                        //         ? console.log("must shutdown display") 
-                                        //         : null
+
                                         countShutdown >= shutDownWhenStopSeconds 
                                                 ? setShowStopOverlay( true ) 
                                                 : setShowStopOverlay( false )
@@ -128,7 +119,7 @@ export default function Home() {
                                         if ( lastimageanalysed !== playerdata.image && playerdata.state != "connecting" ) {
                                                 const v = new Vibrant( playerdata.image );
                                                 v.getPalette(( err, palette ) => makePalette( palette ));
-                                                setlastimageanalysed( playerdata.image );
+                                                setlastimageanalysed( playerdata.image );
                                         }
 
                                         setdata(playerdata);
@@ -145,7 +136,6 @@ export default function Home() {
                                         setIsBeingChecked( false )
                                         setresetBackground( false )
                                         setloading( false )
-
                                 }
                         }
                 }, waitduration);
@@ -170,26 +160,26 @@ export default function Home() {
         const myPalette = new ColourPalette();
 
         const makePalette = ( palette ) => {
-          try{
-                const vibrantprocessed = 'rgba(' + palette.Vibrant._rgb[0] + ', ' + palette.Vibrant._rgb[1] + ', ' + palette.Vibrant._rgb[2] + ', 100)'
-                myPalette.appendValueToList("vibrant", vibrantprocessed)
-          }catch(e){null}
-          try{
-                const darkVibrantProcessed = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 100)'
-                myPalette.appendValueToList("darkvibrant", darkVibrantProcessed)
-          }catch(e){null}
-          try{
-                const darkVibrantProcessedLIGHT = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 0.5)'
-                myPalette.appendValueToList("darkvibrantlight", darkVibrantProcessedLIGHT)
-          }catch(e){null}
-          try{
-                const lightMutedProcessed = 'rgba(' + palette.LightMuted._rgb[0] + ', ' + palette.LightMuted._rgb[1] + ', ' + palette.LightMuted._rgb[2] + ', 100)'
-                myPalette.appendValueToList("lightmuted", lightMutedProcessed)
-          }catch(e){null}
-          try{
-                const mutedProcessed = 'rgba(' + palette.Muted._rgb[0] + ', ' + palette.Muted._rgb[1] + ', ' + palette.Muted._rgb[2] + ', 100)'
-                myPalette.appendValueToList("muted", mutedProcessed)
-          }catch(e){null}
+                try{
+                        const vibrantprocessed = 'rgba(' + palette.Vibrant._rgb[0] + ', ' + palette.Vibrant._rgb[1] + ', ' + palette.Vibrant._rgb[2] + ', 100)'
+                        myPalette.appendValueToList( "vibrant", vibrantprocessed )
+                }catch(e){null}
+                try{
+                        const darkVibrantProcessed = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 100)'
+                        myPalette.appendValueToList("darkvibrant", darkVibrantProcessed )
+                }catch(e){null}
+                try{
+                        const darkVibrantProcessedLIGHT = 'rgba(' + palette.DarkVibrant._rgb[0] + ', ' + palette.DarkVibrant._rgb[1] + ', ' + palette.DarkVibrant._rgb[2] + ', 0.5)'
+                        myPalette.appendValueToList( "darkvibrantlight", darkVibrantProcessedLIGHT )
+                }catch(e){null}
+                try{
+                        const lightMutedProcessed = 'rgba(' + palette.LightMuted._rgb[0] + ', ' + palette.LightMuted._rgb[1] + ', ' + palette.LightMuted._rgb[2] + ', 100)'
+                        myPalette.appendValueToList( "lightmuted", lightMutedProcessed )
+                }catch(e){null}
+                try{
+                        const mutedProcessed = 'rgba(' + palette.Muted._rgb[0] + ', ' + palette.Muted._rgb[1] + ', ' + palette.Muted._rgb[2] + ', 100)'
+                        myPalette.appendValueToList( "muted", mutedProcessed )
+                }catch(e){null}
                 setColourPalette(myPalette.colors)
         }
    
@@ -220,15 +210,10 @@ export default function Home() {
 
 
         return <>
-
-                {/* <link
-                        href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-                        rel="stylesheet"
-            /> */}
                 { showStopOverlay === true &&<>
                         <div 
                                 className = { "overlay" }
-                                onClick = { (e)=> {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
+                                onClick = { ( e ) => {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
                 {/* { topMenu === true && <> 
