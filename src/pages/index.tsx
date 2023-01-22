@@ -140,13 +140,11 @@ export default function Home( ) {
                                                 setCountShutdown( countShutdown + 1 )
                                         }
 
-                                        if ( playerdata.state === "pause" && playerdata.service === "Capture" && playerdata.state === "stop" ){
+                                        if ( playerdata.state !== "pause" && playerdata.service !== "Capture" && playerdata.state !== "stop" ){
                                                 setisPause( false )
                                                 setShutdown( false )
                                                 setCountShutdown( 0 )
                                         }
-
-                                        console.log(countShutdown)
 
                                         countShutdown >= shutDownWhenStopSeconds 
                                                 ? setShowStopOverlay( true ) 
@@ -230,7 +228,7 @@ export default function Home( ) {
         return <>
                 { volumeOverlay == true && loading == false && <> 
                         <Volumeindicator
-                                volume = { data.volume }
+                                volume = { volumme }
                                 action = { setVolumeOverlay }/>
                 </>}
                 { showStopOverlay === true &&< >
