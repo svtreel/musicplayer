@@ -27,10 +27,10 @@ interface Props {
                 darkvibrantlight: string,
                 lightmuted: string
         } 
-        swipeAnimation: {
-                direction: string, 
-                delta: number,
-        }
+        // swipeAnimation: {
+        //         direction: string, 
+        //         delta: number,
+        // }
         onswitch: boolean; 
         artwork: string | null;
         progress: number;
