@@ -17,7 +17,7 @@ interface Props {
                 title1: string | boolean | null,
                 title2: string | boolean | null | undefined, 
                 title3: string | boolean | null | undefined,
-                volume: string | null 
+                volume: number 
         }
         colourPalette: {
                 muted: string,
