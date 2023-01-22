@@ -8,10 +8,9 @@
     align-content:stretch;
     z-index:99999999;
     justify-content: center;
-    background-color:rgba(0,0,0,0.5);
 }
 .content {
-    position:absolute;
+    position: absolute;
     justify-content: center;
     align-items: center;
     width:100%;

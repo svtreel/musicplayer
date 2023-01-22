@@ -65,7 +65,7 @@ export default function Component( props: Props ) {
                 action = { props.action }
             />
             <div className = { s.content }>
-                { data.length >= 0 && <> 
+                { data.length == 0 && <> 
                     <Loader></Loader>
                 </>}
                 { data.length >= 1 &&  <> 
