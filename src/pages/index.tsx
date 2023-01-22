@@ -133,7 +133,7 @@ export default function Home() {
                                         setonswitch( true )
                                         setProgress( calcPercentProgress() ) 
                                         setIsBeingChecked( false )
-                                        setresetBackground( false )
+                                        // setresetBackground( false )
                                         setloading( false )
                                 }
                         }
