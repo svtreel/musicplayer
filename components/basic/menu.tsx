@@ -10,7 +10,7 @@ interface Props {
 export default function Component( props: Props ) {
 
     const [ data, setData ] = useState( [] )
-    const [ show, setShow ] = useState( "presets")
+    const [ show, setShow ] = useState( "presets" )
 
     console.log("/api/get"+ show)
 

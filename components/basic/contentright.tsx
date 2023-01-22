@@ -62,7 +62,7 @@ export default function Component( props: Props ) {
                                         tidal            = { props.service != "TidalConnect" ? true : false }
                                 />
                         </> }
-                        { props.state == "connecting" && <> 
+                        { props.state == "connecting" && props.service != "Capture" && <> 
                                 <Loader/>
                         </> }
                 </div>
