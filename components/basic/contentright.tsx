@@ -16,12 +16,16 @@ interface Props {
         serviceIcon: string | null;
         connecting: boolean;
         album: string | null;
-        lightmuted: string | null;
-        lightvibrant: string | null;
-        vibrant: string | null;
-        muted: string | null;
-        darkvibrant: string | null;
-        darkvibrantlight: string | null;
+        colourPalette: 
+                {    
+                        vibrant: string;
+                        lightvibrant: string;
+                        darkvibrant: string;
+                        darkvibrantlight: string;
+                        muted: string;
+                        lightmuted: string;
+                        darkmuted: string;
+                }
         songLength: number;
         progress: number;
         onswitch: boolean;
@@ -36,13 +40,12 @@ export default function Component( props: Props ) {
 
                         <Title 
                                 text            = { props.title }
-                                colour          = { props.vibrant ? props.vibrant : null }
-                                connecting      = { props.connecting ? true : false }
+                                colourPalette   = { props.colourPalette }
                         />
                         { props.state != "connecting" && <>
                                 <Artist 
                                         text    = { props.artist }
-                                        colour  = { props.lightmuted ? props.lightmuted : null }
+                                        colour  = { props.colourPalette.lightmuted }
                                 />
                                 <Album 
                                         text    = { props.album }
@@ -55,13 +58,7 @@ export default function Component( props: Props ) {
 
                                 <Songprogress 
                                         progress         = { props.progress } 
-                                        color            = { null }
-                                        muted            = { props.muted } 
-                                        vibrant          = { props.vibrant }
-                                        lightvibrant     = { props.lightvibrant }
-                                        darkvibrant      = { props.darkvibrant }
-                                        darkvibrantlight = { props.darkvibrantlight }
-                                        lightmuted       = { props.lightmuted }
+                                        colourPalette    = { props.colourPalette } 
                                         songlength       = { props.songLength }
                                         tidal            = { props.service != "TidalConnect" ? true : false }
                                 />

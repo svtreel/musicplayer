@@ -1,16 +1,21 @@
 .title{
-        font-size: 4rem;
-        font-family: arial,sans-serif;
+        font-size: 3.5rem;
         line-height:4rem;
         min-height:4.2rem;
+        text-transform: uppercase;
+        display:flex;
         max-height:8.4rem;
         height:8.4rem;
-        filter: brightness(200%);
         margin-bottom:0rem;
         font-weight: 800;
-        overflow:hidden;
-        color:white;
-        white-space: wrap;
-        text-overflow: ellipsis;
-        text-shadow: 2px 3px 4px rgba(0,0,0,0.63);
+}
+
+.title{
+        background-color: white;   
+        background-size: 100%;
+        background-repeat: repeat; 
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
 }

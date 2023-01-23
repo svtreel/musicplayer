@@ -4,13 +4,16 @@ import React, {useRef} from 'react'
 interface Props {
         progress : number;
         songlength: number;
-        color : string | null;
-        muted : string | null;
-        vibrant : string | null;
-        lightvibrant : string | null;
-        darkvibrant : string | null;
-        darkvibrantlight : string | null;
-        lightmuted : string | null;
+        colourPalette: 
+                {    
+                        vibrant: string;
+                        lightvibrant: string;
+                        darkvibrant: string;
+                        darkvibrantlight: string;
+                        muted: string;
+                        lightmuted: string;
+                        darkmuted: string;
+                }
         tidal: boolean;
 }
 
@@ -19,9 +22,6 @@ export default function Component( props: Props ) {
         const { progress = 0 } = props;
 
         const rprogressbarid = useRef( null ); 
-        const color = props.color
-                ? props.color 
-                : null
 
         const calclength = ( value: number ) => {
                 const minutes = Math.floor( value / 60 );
@@ -29,14 +29,19 @@ export default function Component( props: Props ) {
                 return `${ minutes }:${ value < 10 ? '0' : ''}${ value }`;
         }
 
-        const styleWrapper = props.darkvibrantlight
-                ? { backgroundColor: props.darkvibrantlight }
+        const styleWrapper = props.colourPalette.darkmuted
+                ? { backgroundColor: props.colourPalette.darkmuted }
                 : {}
-        const stylerprogressbarid = props.vibrant
-                ? { width: props.progress + "%",backgroundColor: props.vibrant }
+        const stylerprogressbarid = props.colourPalette.lightvibrant
+                ? { 
+                        width: props.progress + "%", 
+                        backgroundColor: props.colourPalette.lightvibrant,
+                }
                 : {} 
-        const styleknob = props.lightvibrant
-                ? { backgroundColor: props.lightvibrant }
+        const styleknob = props.colourPalette.muted
+                ? { backgroundColor: props.colourPalette.muted,
+                
+                        borderTop: "1px solid " + props.colourPalette.lightmuted, }
                 : {} 
 
         return <>

@@ -7,7 +7,6 @@
         background-color: rgba(0,0,0,1)
 }
 .wrapper{
-        background-color:#888;
         min-width:95%;
         height: 5px;
         box-shadow: 2px 3px 8px rgba(0,0,0,0.23);
@@ -15,12 +14,11 @@
 .knob{
         position:relative;
         float:right;
-        background-color:white;
-        width:8px;
-        height:8px;
+        width:9px;
+        height:9px;
         border-top:1px solid white;
         border-radius:100%;
-        top:-2px;
+        top:-2.5px;
         right:-2px;
         opacity:1;
 }
@@ -44,8 +42,7 @@
         height:5px;
         width:0%;
         border-radius:30px;
-        filter:brightness(170%);
-        background-color:#bada55;
+        filter:brightness(100%);
         transition: 3s;
 }
 .wrapper p {
