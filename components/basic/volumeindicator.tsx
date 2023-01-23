@@ -9,7 +9,7 @@ interface Props {
 
 export default function Component( props: Props ) {
 
-        const [ time, setTime ] = useState( 1 )
+        const [ time, setTime ] = useState<number>( 1 )
 
         useEffect( ( ) => {
                 const countDown = setInterval(async ( ) => {
@@ -25,8 +25,8 @@ export default function Component( props: Props ) {
 
         console.log( "time", time )
 
-        const first = [ s.half, s.first ];
-        const second = [ s.half, s.second ]
+        // const first = [ s.half, s.first ];
+        // const second = [ s.half, s.second ]
 
         return <>
         <div className={s.container}>

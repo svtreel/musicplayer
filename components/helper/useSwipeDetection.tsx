@@ -21,13 +21,20 @@ const distance_initY = ( startY: number | null, endY: number | null ) => {
     return init
 }
 
-export default function useSwipeDetection( left: Function, right: Function, up: Function, down: Function, animation: Function ) {
+export default function useSwipeDetection( 
+  left: Function, 
+  right: Function, 
+  up: Function, 
+  down: Function, 
+  animation: Function, 
+  triggerDistance: number,
+  setTriggerdistance: Function
+   ) {
 
   const [ startX, setStartX ]                     = useState<number | null>(  null );
   const [ endX, setEndX ]                         = useState<number | null>( null );
   const [ startY, setStartY ]                     = useState<number | null>( null );
   const [ endY, setEndY ]                         = useState<number | null>( null );
-  const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 );
 
   useEffect(( ) => {
     const handleTouchStart = ( event: TouchEvent ) => {
@@ -111,6 +118,7 @@ export default function useSwipeDetection( left: Function, right: Function, up: 
       }
       if ( distanceY > triggerDistance && startY > endY ) {
         console.log( "Up swipe detected" )
+        setTriggerdistance(150)
         up( );
         animation( { direction: "", delta: 0 } )
       }

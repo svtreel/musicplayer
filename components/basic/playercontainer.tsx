@@ -20,12 +20,13 @@ interface Props {
                 volume: number 
         }
         colourPalette: {
-                muted: string,
-                lightvibrant: string,
-                vibrant: string,
-                darkvibrant: string,
-                darkvibrantlight: string,
-                lightmuted: string
+                vibrant: string;
+                lightvibrant: string;
+                darkvibrant: string;
+                darkvibrantlight: string;
+                muted: string;
+                lightmuted: string;
+                darkmuted: string;
         } 
         // swipeAnimation: {
         //         direction: string, 
@@ -104,12 +105,7 @@ export default function Component( props: Props ) {
                                                 artwork           = { props.artwork }
                                                 progress          = { props.progress}
                                                 songLength        = { props.data.length}
-                                                muted             = { props.colourPalette.muted }
-                                                lightvibrant      = { props.colourPalette.lightvibrant }
-                                                vibrant           = { props.colourPalette.vibrant }
-                                                darkvibrant       = { props.colourPalette.darkvibrant }
-                                                darkvibrantlight  = { props.colourPalette.darkvibrantlight }
-                                                lightmuted        = { props.colourPalette.lightmuted }
+                                                colourPalette     = { props.colourPalette }
                                                 connecting        = { props.data.state == "connecting" ? true : false }
                                 />
 

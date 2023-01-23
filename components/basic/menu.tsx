@@ -4,28 +4,58 @@ import MenuItem from './menuitem'
 import Loader from './loader';
 
 interface Props {
-        action: Function;
+    action: Function;
+    swipeDistance: Function;
 }
 
 export default function Component( props: Props ) {
 
     const [ data, setData ] = useState( [] )
-    const [ show, setShow ] = useState( "presets" )
+    const [ loading, setLoading ] = useState<boolean>( true )
+    const [ show, setShow ] = useState<string>( "playlists" )
+    const [ request, setRequest ] = useState<string>(  )
 
-    console.log("/api/get"+ show)
+    props.swipeDistance(300)
 
     useEffect( ( ) => {
         (
             async ( ) => {
-                console.log( "data" )
-                const url = "/api/get"+ show
-                const r = await fetch( url );
-                const data = await r.json( );
-                setData( data )
-                console.log( data )
+                if ( loading === true ) {
+                    console.log( "data" )
+                    const url = "/api/get"+ show
+                    const r = await fetch( url );
+                    const data = await r.json( );
+                    setData( data )
+                    setLoading( false )
+                }
             }
         )()
     }, [ show ] )
+
+    const showUpdate = ( arg:string ) => {
+        setData( [] )
+        setLoading( true )
+        setShow(arg)
+    }
+
+    useEffect( ( ) => {
+        (
+            async ( ) => {
+                if ( request != undefined ){
+                    const url = "http://192.168.0.222:11000" + request
+                    const r = await fetch( url );
+                }
+            }
+        )()
+    }, [ request ] )
+
+    const getServiceURL = ( el: {id: number, url: string} ) => {
+        if ( show == "presets" ){
+            return `/Preset?id=${el.id}`
+        } else {
+            return `${el.url}`
+        }
+    }
 
 
     return <>
@@ -38,25 +68,19 @@ export default function Component( props: Props ) {
                 label = "Music"
                 icon = "nightlife"
                 colour = "#ed64e6"
-                action = { props.action }
+                action = { () => showUpdate( "playlists" ) }
             />
             <MenuItem
                 label = "Presets"
                 icon = "star_rate"
                 colour = "#8e6ee6"
-                action = { props.action }
+                action = { () => showUpdate( "presets" ) }
             />
             <MenuItem
                 label = "HDMI"
                 icon = "connected_tv"
                 colour = "#6ee6ce"
-                action = { props.action }
-            />
-            <MenuItem
-                label = "Radio"
-                icon = "radio"
-                colour = "#e6d86e"
-                action = { props.action }
+                action = { () => setRequest( "/Preset?id=5" ) }
             />
             <MenuItem
                 label = "Off"
@@ -69,10 +93,22 @@ export default function Component( props: Props ) {
                     <Loader></Loader>
                 </>}
                 { data.length >= 1 &&  <> 
-                    {React.Children.toArray( data.map( ( el ) => ( <> 
-                        <div className={s.selectable}>
-                            <img className={s.selectableImage} src = { el.image } ></img>
-                            <p> { el.name } </p>
+                    {React.Children.toArray( data.map( ( el : {
+                        url: string | null;
+                        image: string;
+                        id: number | null;
+                        name: string;
+                    } ) => ( <> 
+                        <div 
+                            className = { s.selectable }
+                            onClick = { ( ) => setRequest( getServiceURL( el ) ) } >
+                            <img 
+                                className   = { s.selectableImage } 
+                                src         = { el.image } >
+                            </img>
+                            <p> 
+                                { el.name } 
+                            </p>
                         </div>
                     </> ) ) ) }
                 </>}

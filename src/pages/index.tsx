@@ -7,6 +7,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { ImageSource } from 'node-vibrant/lib/typing';
 import Menu from '../../components/basic/menu';
 import Volumeindicator from '../../components/basic/volumeindicator';
+import { Empty } from 'antd';
 
 class ColourPalette {
         public colors: any;
@@ -52,19 +53,30 @@ export default function Home( ) {
         const [ showStopOverlay, setShowStopOverlay ] = useState( false )
         const [ topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
-        // const [resetBackground, setresetBackground] = useState( false )
-        const [ colourPalette, setColourPalette ] = useState( )
+        const [ colourPalette, setColourPalette ] = useState( 
+                {
+                        "vibrant": "rgba( 255, 255, 255, 1 )",
+                        "lightvibrant": "rgba( 255, 255, 255, 1 )",
+                        "darkvibrant": "rgba( 255, 255, 255, 1 )",
+                        "darkvibrantlight": "rgba( 255, 255, 255, 1 )",
+                        "muted": "rgba( 255, 255, 255, 1 )",
+                        "lightmuted": "rgba( 255, 255, 255, 1 )",
+                        "darkmuted": "rgba( 255, 255, 255, 1 )",
+                } 
+        )
         const [ swipeAnimation, setSwipeAnimation ] = useState(
                 {
                   direction: "",
                   delta: 0
                 }
         )
-        const [ waitduration, setwaitduration ] = useState( 1200 )
-        const [ countShutdown, setCountShutdown ] = useState( 0 )
+        const [ waitduration, setwaitduration ] = useState<number>( 1200 )
+        const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
-        const [ volumeValue, setVolumeValue ] = useState( 0 )
+        const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
+        const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 );
+
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
@@ -101,13 +113,6 @@ export default function Home( ) {
                 )()
         }, [ shutDown ])
 
-        // const resetAnimationStyle = ( ) => {
-        //         setSwipeAnimation({
-        //                 direction: "",
-        //                 delta: 0
-        //         })
-        // }
-
         useEffect( ( ) => {
                 const refreshInterval = setInterval(async ( ) => {
 
@@ -115,11 +120,6 @@ export default function Home( ) {
 
                         } else {
                                 console.log( "Updating..." )
-
-                                // swipeAnimation.direction == "right" ? resetAnimationStyle() : null
-                                // swipeAnimation.direction == "left" ? resetAnimationStyle() : null
-                                // swipeAnimation.direction == "up" ? resetAnimationStyle() : null
-                                // swipeAnimation.direction == "down" ? resetAnimationStyle() : null
                                 
                                 if ( isBeingChecked === false ) {
                                         setIsBeingChecked( true );
@@ -159,7 +159,6 @@ export default function Home( ) {
                                         setonswitch( true )
                                         setIsBeingChecked( false )
                                         setloading( false )
-                                        // setresetBackground( false )
                                 }
                         }
                 }, waitduration );
@@ -169,25 +168,43 @@ export default function Home( ) {
         const myPalette = new ColourPalette( );
 
         const makePalette = ( palette ) => {
+
+                // * Results into:
+
+                // * Vibrant
+                // * Muted
+                // * DarkVibrant
+                // * DarkMuted
+                // * LightVibrant
+                // * LightMuted
+
                 try{
-                        const vibrantprocessed = 'rgba(' + palette.Vibrant._rgb[ 0 ] + ', ' + palette.Vibrant._rgb[ 1 ] + ', ' + palette.Vibrant._rgb[ 2 ] + ', 100 )'
-                        myPalette.appendValueToList( "vibrant", vibrantprocessed )
+                        const vibrant = 'rgba(' + palette.Vibrant._rgb[ 0 ] + ', ' + palette.Vibrant._rgb[ 1 ] + ', ' + palette.Vibrant._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList( "vibrant", vibrant )
                 }catch( e ){ null }
                 try{
-                        const darkVibrantProcessed = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 100 )'
-                        myPalette.appendValueToList("darkvibrant", darkVibrantProcessed )
+                        const darkvibrant = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList("darkvibrant", darkvibrant )
                 }catch( e ){ null }
                 try{
-                        const darkVibrantProcessedLIGHT = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 0.5 )'
-                        myPalette.appendValueToList( "darkvibrantlight", darkVibrantProcessedLIGHT )
+                        const darkvibrantlight = 'rgba(' + palette.DarkVibrant._rgb[ 0 ] + ', ' + palette.DarkVibrant._rgb[ 1 ] + ', ' + palette.DarkVibrant._rgb[ 2 ] + ', 0.5 )'
+                        myPalette.appendValueToList( "darkvibrantlight", darkvibrantlight )
                 }catch( e ){ null }
                 try{
-                        const lightMutedProcessed = 'rgba(' + palette.LightMuted._rgb[ 0 ] + ', ' + palette.LightMuted._rgb[ 1 ] + ', ' + palette.LightMuted._rgb[ 2 ] + ', 100 )'
-                        myPalette.appendValueToList( "lightmuted", lightMutedProcessed )
+                        const lightmuted = 'rgba(' + palette.LightMuted._rgb[ 0 ] + ', ' + palette.LightMuted._rgb[ 1 ] + ', ' + palette.LightMuted._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList( "lightmuted", lightmuted )
                 }catch( e ){ null }
                 try{
-                        const mutedProcessed = 'rgba(' + palette.Muted._rgb[ 0 ] + ', ' + palette.Muted._rgb[ 1 ] + ', ' + palette.Muted._rgb[ 2 ] + ', 100 )'
-                        myPalette.appendValueToList( "muted", mutedProcessed )
+                        const muted = 'rgba(' + palette.Muted._rgb[ 0 ] + ', ' + palette.Muted._rgb[ 1 ] + ', ' + palette.Muted._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList( "muted", muted )
+                }catch( e ){ null }
+                try{
+                        const darkmuted = 'rgba(' + palette.DarkMuted._rgb[ 0 ] + ', ' + palette.DarkMuted._rgb[ 1 ] + ', ' + palette.DarkMuted._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList( "darkmuted", darkmuted )
+                }catch( e ){ null }
+                try{
+                        const lightvibrant = 'rgba(' + palette.LightVibrant._rgb[ 0 ] + ', ' + palette.LightVibrant._rgb[ 1 ] + ', ' + palette.LightVibrant._rgb[ 2 ] + ', 1 )'
+                        myPalette.appendValueToList( "lightvibrant", lightvibrant )
                 }catch( e ){ null }
                 setColourPalette( myPalette.colors )
         }
@@ -224,11 +241,26 @@ export default function Home( ) {
                 setIncreasedTopmarginPlayercontainer( true )
         }
 
-        useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, setSwipeAnimation );
-
+        useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, setSwipeAnimation, triggerDistance, setTriggerdistance);
 
         return <>
-                { volumeOverlay == true && loading == false && <> 
+                {/* { colourPalette != undefined && <>
+                        <div style={{ backgroundColor: colourPalette.vibrant, width: "100px", height: "30px" }}>vibrant
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.darkvibrant, width: "100px", height: "30px" }}>darkvibrant
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.lightvibrant, width: "100px", height: "30px" }}>lightvibrant
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.darkvibrantlight, width: "100px", height: "30px" }}>darkvibrantlight
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.muted, width: "100px", height: "30px" }}>muted
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.darkmuted, width: "100px", height: "30px" }}>darkmuted
+                        </div>
+                        <div style={{ backgroundColor: colourPalette.lightmuted, width: "100px", height: "30px" }}>lightmuted
+                        </div>
+                </> } */}
+                { volumeOverlay === true && loading === false && <> 
                         <Volumeindicator
                                 volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
@@ -236,14 +268,15 @@ export default function Home( ) {
                 { showStopOverlay === true &&< >
                         <div 
                                 className = { "overlay" }
-                                onClick = { ( e ) => {setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
+                                onClick = { ( e ) => { setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
                         </div>
                 </>}
                 { topMenu === true && <> 
                         <Menu
                                 action = { setMenuitem }
+                                swipeDistance = { setTriggerdistance }
                         />
-                        <div className = "downshadow"></div>
+                        <div className = "downshadow" ></div>
 
                         <div 
                                 className = { "overlay" }>
@@ -253,6 +286,7 @@ export default function Home( ) {
                         </div>
 
                 </> }
+
                 { loading == true && <>
                         <Waitscreen />
                 </> }
