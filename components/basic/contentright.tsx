@@ -41,6 +41,7 @@ export default function Component( props: Props ) {
                         <Title 
                                 text            = { props.title }
                                 colourPalette   = { props.colourPalette }
+                                service         = { props.service }
                         />
                         { props.state != "connecting" && <>
                                 <Artist 

@@ -5,6 +5,7 @@ import Loader from './loader';
 
 interface Props {
     action: Function;
+    action2: Function;
     swipeDistance: Function;
 }
 
@@ -32,10 +33,10 @@ export default function Component( props: Props ) {
         )()
     }, [ show ] )
 
-    const showUpdate = ( arg:string ) => {
-        setData( [] )
+    const showUpdate = ( arg: string ) => {
+        setData( [ ] )
         setLoading( true )
-        setShow(arg)
+        setShow( arg )
     }
 
     useEffect( ( ) => {
@@ -44,6 +45,9 @@ export default function Component( props: Props ) {
                 if ( request != undefined ){
                     const url = "http://192.168.0.222:11000" + request
                     const r = await fetch( url );
+                    console.log("presst")
+                    props.action( false )
+                    props.action2( false )
                 }
             }
         )()
@@ -65,7 +69,7 @@ export default function Component( props: Props ) {
         </link>
         <div className={ s.menucontainer }>
             <MenuItem
-                label = "Music"
+                label = "Playlists"
                 icon = "nightlife"
                 colour = "#ed64e6"
                 action = { () => showUpdate( "playlists" ) }

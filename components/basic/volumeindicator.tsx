@@ -9,32 +9,35 @@ interface Props {
 
 export default function Component( props: Props ) {
 
-        const [ time, setTime ] = useState<number>( 1 )
+        const [ time, setTime ] = useState<number>( 3 )
+        const [ fadeout, setFadeout ] = useState<number>( 1 )
+        const [ stylesForOverlay, setStylesForOverlay ] = useState<object>( { opacity: "1" } )
 
         useEffect( ( ) => {
-                const countDown = setInterval(async ( ) => {
+                const countDown = setInterval( async ( ) => {
+
                         setTime( time -1 )
+
+                        setFadeout( 
+                                0
+                        )
+                        console.log( fadeout )
+                        setStylesForOverlay( { opacity: fadeout } )
                 }, 1000);
                 return () => clearInterval( countDown )
         })
 
-        if (time <= 0) {
+        if ( time <= 0 ) {
                 props.action( false )
-                setTime( 3 )
         }
 
-        console.log( "time", time )
-
-        // const first = [ s.half, s.first ];
-        // const second = [ s.half, s.second ]
-
         return <>
-        <div className={s.container}>
-            <div className={s.circle_diagram} 
-                style={ { ['--percent']: props.volume }}>
-                <div className = {s.text}>{props.volume}</div>
-            </div>
-            
-        </div>
+                <div className={ s.container } style={ stylesForOverlay }>
+                <div className={ s.circle_diagram } 
+                        style={ { ['--percent']: props.volume }}>
+                        <div className = { s.text }>{ props.volume }</div>
+                </div>
+                
+                </div>
         </>
 } 
