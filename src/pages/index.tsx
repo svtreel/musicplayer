@@ -75,7 +75,7 @@ export default function Home( ) {
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
-        const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 );
+        const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 )
 
 
         const progress = useMemo( ( ) => { 
@@ -99,22 +99,22 @@ export default function Home( ) {
         useEffect( ( ) => {
                 (
                         async ( ) => {
-                                if ( shutDown ) {
+                                if ( shutDown === true ) {
+                                        setwaitduration(10000)
                                         const url = "/api/shutdown";
-                                        const r = await fetch( url );
-
+                                        const r = await fetch( url )
                                 }
-                                if ( !shutDown ) {
+                                if ( shutDown === false ) {
+                                        setwaitduration(1200)
                                         const url = "/api/turnon";
                                         const r = await fetch( url );
-
                                 }
                         }
                 )()
-        }, [ shutDown ])
+        }, [ shutDown ] )
 
         useEffect( ( ) => {
-                const refreshInterval = setInterval(async ( ) => {
+                const refreshInterval = setInterval( async ( ) => {
 
                         if ( menuitem === null ) {
 
