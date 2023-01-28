@@ -38,6 +38,7 @@ interface Props {
         isPause: boolean;
         action_pause: Function;
         action_play: Function;
+        fadeout: boolean;
         increasedTopmarginPlayercontainer: boolean;
 }
 
@@ -91,6 +92,7 @@ export default function Component( props: Props ) {
                                                 artwork           = { props.artwork }
                                                 action_pause      = { props.action_pause}
                                                 action_play       = { props.action_play}
+                                                fadeout           = { props.fadeout }
                                 />
                                 <Contentright
                                                 artist            = { props.data.artist ? props.data.artist.toString() : "" }
@@ -100,6 +102,7 @@ export default function Component( props: Props ) {
                                                 service           = { props.data.service }
                                                 state             = { props.data.state }
                                                 serviceIcon       = { props.data.serviceIcon }
+                                                fadeout           = { props.fadeout }
                                                 onswitch          = { props.onswitch }
                                                 isPause           = { props.isPause }
                                                 artwork           = { props.artwork }

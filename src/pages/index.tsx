@@ -68,6 +68,7 @@ export default function Home( ) {
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
+        const [ fadeout, setFadeout ] = useState<boolean>( false )
         const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 )
 
 
@@ -87,8 +88,11 @@ export default function Home( ) {
         const updateImageOnDemand = useMemo( ( ) => { 
 
                 setonswitch( false )
+                setFadeout( false )
+
                 const i = data.image !== "n/A" ? data.image : ""
                 return updatePaletteFromImage( i )
+
         }, [ data.image ] )
         
         const shutDownOrLeaveOn = useMemo( ( ) => { 
@@ -109,7 +113,7 @@ export default function Home( ) {
         }, [ shutDown ] )
 
         useEffect( ( ) => {
-                
+
                 const refreshInterval = setInterval( async ( ) => {
                                 
                                 if ( isBeingChecked === false ) {
@@ -163,6 +167,7 @@ export default function Home( ) {
 
         const makePalette = ( palette ) => {
                 setonswitch( true )
+                setFadeout( true )
 
                 // * Results into:
 
@@ -302,6 +307,7 @@ export default function Home( ) {
                                 colourPalette     = { colourPalette }
                                 action_pause      = { handleClickPause }
                                 action_play       = { handleClickPlay }
+                                fadeout           = { fadeout }
 
                                 increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />

@@ -11,9 +11,12 @@ interface Props {
         isPause: boolean;
         action_play: Function;
         action_pause: Function;
+        fadeout: boolean;
 }
 
 export default function Component( props: Props ) {
+
+        const fadeoutValue = props.fadeout === true ? "1" : "0"
 
         return <>
                 <div className={ s.container }>
@@ -30,25 +33,26 @@ export default function Component( props: Props ) {
                                         <Loader/>
                                 </> }
                                 </> }
-                                { props.onswitch == true && <>
-                                        { props.isPause === true && <> 
-                                                <Artwork
-                                                        artwork         = { props.artwork }
-                                                        action          = { props.action_play }
-                                                        pauseImage      = { "not required" }
-                                                        paused          = { true }
-                                                />
-                                        </>} 
-                                        { props.isPause === false && <> 
-                                                <Artwork
-                                                        artwork         = { props.artwork }
-                                                        action          = { props.action_pause }
-                                                        pauseImage      = { "not required" }
-                                                        paused          = { false }
-                                                />
-                                        </> }     
-                                </> }  
-                                      
+                                < div style = {{ opacity : fadeoutValue }} >
+                                        { props.onswitch == true && <>
+                                                { props.isPause === true && <> 
+                                                        <Artwork
+                                                                artwork         = { props.artwork }
+                                                                action          = { props.action_play }
+                                                                pauseImage      = { "not required" }
+                                                                paused          = { true }
+                                                        />
+                                                </>} 
+                                                { props.isPause === false && <> 
+                                                        <Artwork
+                                                                artwork         = { props.artwork }
+                                                                action          = { props.action_pause }
+                                                                pauseImage      = { "not required" }
+                                                                paused          = { false }
+                                                        />
+                                                </> }     
+                                        </> }  
+                                </div>
                         </> }    
                         { !props.serviceIcon && <>
                                 {/* ################ ONLY HDMI  */}
