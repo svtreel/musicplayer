@@ -120,6 +120,8 @@ export default function Home( ) {
 
                                         setonswitch( true )
 
+                                        setFadeout( true )
+
                                         setIsBeingChecked( true )
 
                                         const url = "/api/getmeta"
@@ -230,10 +232,12 @@ export default function Home( ) {
         }
         function handleLeftSwipe( ) {
                 setonswitch( true )
+                setFadeout( true )
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Next" )
         }
         function handleRightSwipe( ) {
                 setonswitch( true )
+                setFadeout( true )
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Previous" )
         }
         function handleUpSwipe( ) {

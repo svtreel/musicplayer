@@ -17,6 +17,9 @@ interface Props {
 export default function Component( props: Props ) {
 
         const fadeoutValue = props.fadeout === true ? "1" : "0"
+        const transitionConf = props.fadeout === true ? "2s" : "0s"
+        const delayConf = props.fadeout === true ? "0s" : "0s"
+        const scaleConf = props.fadeout === true ? "1" : "0.97"
 
         return <>
                 <div className={ s.container }>
@@ -33,7 +36,14 @@ export default function Component( props: Props ) {
                                         <Loader/>
                                 </> }
                                 </> }
-                                < div style = {{ opacity : fadeoutValue }} >
+                                < div className = { s.fade } style = {
+                                                { 
+                                                        opacity : fadeoutValue,
+                                                        transition : transitionConf,
+                                                        transitionDelay : delayConf,
+                                                        transform : "scale(" + scaleConf + ")",
+                                                }
+                                        }>
                                         { props.onswitch == true && <>
                                                 { props.isPause === true && <> 
                                                         <Artwork

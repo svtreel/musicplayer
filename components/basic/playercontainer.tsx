@@ -73,11 +73,7 @@ export default function Component( props: Props ) {
 
         return <>
                 { props.data && <>
-                        <div className = {  s.container +" "+ topmargin_init  } 
-                                style = {{
-                                        transform: "animationDirection_init()"
-                                }}
-                        >
+                        <div className = {  s.container +" "+ topmargin_init  }>
                                 { props.data && props.data.service && props.data.service !== "Capture" && <>
                                         <Service
                                                 service          = { props.data.service }

@@ -15,3 +15,7 @@
         position:absolute;
         display:flex;
 }
+
+.fade {
+        transition: "transform" 0.2s !important;
+}
