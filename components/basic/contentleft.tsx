@@ -18,37 +18,37 @@ export default function Component( props: Props ) {
         return <>
                 <div className={ s.container }>
                 
-                        { props.serviceIcon && <>
+                         { props.serviceIcon && <>
                                 { props.onswitch == false && <>
-                                        {/* ################ LOADING */}
+                                        { props.isPause === false && <> 
                                         <Artwork
-                                                artwork         = { "/src/images/blackpixel.png" }
+                                                artwork         = { "/blackpixel.png" }
                                                 paused          = { false }
                                                 pauseImage      = { "not required" }
                                                 action          = { ( ) => { } }
                                         />
                                         <Loader/>
                                 </> }
+                                </> }
                                 { props.onswitch == true && <>
-                                        { props.isPause == true && <> 
-                                                {/* ################ PAUSED */}
+                                        { props.isPause === true && <> 
                                                 <Artwork
                                                         artwork         = { props.artwork }
                                                         action          = { props.action_play }
                                                         pauseImage      = { "not required" }
                                                         paused          = { true }
                                                 />
-                                                
                                         </>} 
+                                        { props.isPause === false && <> 
+                                                <Artwork
+                                                        artwork         = { props.artwork }
+                                                        action          = { props.action_pause }
+                                                        pauseImage      = { "not required" }
+                                                        paused          = { false }
+                                                />
+                                        </> }     
                                 </> }  
-                                { props.isPause == false && <> 
-                                        <Artwork
-                                                artwork         = { props.artwork }
-                                                action          = { props.action_pause }
-                                                pauseImage      = { "not required" }
-                                                paused          = { false }
-                                        />
-                                </> }           
+                                      
                         </> }    
                         { !props.serviceIcon && <>
                                 {/* ################ ONLY HDMI  */}

@@ -22,7 +22,6 @@ export default function Component( props: Props ) {
         (
             async ( ) => {
                 if ( loading === true ) {
-                    console.log( "data" )
                     const url = "/api/get"+ show
                     const r = await fetch( url );
                     const data = await r.json( );
@@ -45,7 +44,6 @@ export default function Component( props: Props ) {
                 if ( request != undefined ){
                     const url = "http://192.168.0.222:11000" + request
                     const r = await fetch( url );
-                    console.log("presst")
                     props.action( false )
                     props.action2( false )
                 }

@@ -41,15 +41,14 @@ export default function Home( ) {
                         title1: "n/A",
                         title2: "n/A",
                         title3: "n/A",
-                        volume: 0
+                        volume: 0,
+                        error: undefined
                         }
                 )
         const [ isPause, setisPause ] = useState( false )
         const [ increasedTopmarginPlayercontainer, setIncreasedTopmarginPlayercontainer ] = useState( false )
         const [ loading, setloading ] = useState( true )
-        const [ lastimageanalysed, setlastimageanalysed] = useState( )
         const [ onswitch, setonswitch ] = useState( false )
-        const [ menuitem, setMenuitem ] = useState( "music" )
         const [ showStopOverlay, setShowStopOverlay ] = useState( false )
         const [ topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
@@ -63,12 +62,6 @@ export default function Home( ) {
                         "lightmuted": "rgba( 255, 255, 255, 1 )",
                         "darkmuted": "rgba( 255, 255, 255, 1 )",
                 } 
-        )
-        const [ swipeAnimation, setSwipeAnimation ] = useState(
-                {
-                  direction: "",
-                  delta: 0
-                }
         )
         const [ waitduration, setwaitduration ] = useState<number>( 1200 )
         const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
@@ -92,75 +85,75 @@ export default function Home( ) {
         }
         
         const updateImageOnDemand = useMemo( ( ) => { 
+
+                setonswitch( false )
                 const i = data.image !== "n/A" ? data.image : ""
                 return updatePaletteFromImage( i )
         }, [ data.image ] )
+        
+        const shutDownOrLeaveOn = useMemo( ( ) => { 
 
-        useEffect( ( ) => {
-                (
-                        async ( ) => {
-                                if ( shutDown === true ) {
-                                        setwaitduration(10000)
-                                        const url = "/api/shutdown";
-                                        const r = await fetch( url )
-                                }
-                                if ( shutDown === false ) {
-                                        setwaitduration(1200)
-                                        const url = "/api/turnon";
-                                        const r = await fetch( url );
-                                }
-                        }
-                )()
+                if ( shutDown === true ) {
+                        const url = "/api/shutdown";
+                        const r = fetch( url )
+
+                        setwaitduration(10000)
+                }
+                if ( shutDown === false ) {
+                        const url = "/api/turnon";
+                        const r = fetch( url );
+
+                        setwaitduration(1200)
+                }
+
         }, [ shutDown ] )
 
         useEffect( ( ) => {
                 const refreshInterval = setInterval( async ( ) => {
-
-                        if ( menuitem === null ) {
-
-                        } else {
-                                console.log( "Updating..." )
                                 
                                 if ( isBeingChecked === false ) {
-                                        setIsBeingChecked( true );
+
                                         setonswitch( true )
 
-                                        const url = "/api/getmeta";
-                                        const r = await fetch( url );
-                                        const playerdata = await r.json( );
+                                        setIsBeingChecked( true )
 
-                                        if ( playerdata.service === "Capture" ){
-                                                setCountShutdown( countShutdown + 12 )
+                                        const url = "/api/getmeta"
+                                        const r = await fetch( url )
+                                        const playerdata = await r.json( )
+
+                                        if ( playerdata.data.error === undefined ) {
+
+                                                if ( playerdata.data.service === "Capture" ){
+                                                        setCountShutdown( countShutdown + 12 )
+                                                }
+
+                                                if ( playerdata.data.state === "pause" ){
+                                                        setisPause( true )
+                                                        setCountShutdown( countShutdown + 0.25 )
+                                                }
+
+                                                if ( playerdata.data.state === "stop" ) {
+                                                        setCountShutdown( countShutdown + 1 )
+                                                }
+
+                                                if ( playerdata.data.state !== "pause" && playerdata.data.service !== "Capture" && playerdata.data.state !== "stop" ){
+                                                        setisPause( false )
+                                                        setShutdown( false )
+                                                        setCountShutdown( 0 )
+                                                }
+
+                                                countShutdown >= shutDownWhenStopSeconds 
+                                                        ? setShowStopOverlay( true ) 
+                                                        : setShowStopOverlay( false )
+                                                countShutdown >= shutDownWhenStopSeconds * 2
+                                                        ? setShutdown( true ) 
+                                                        : setShutdown( false )
+
+                                                setdata( playerdata.data )
+                                                setIsBeingChecked( false )
+                                                setloading( false )
                                         }
-
-                                        if ( playerdata.state === "pause" ){
-                                                setisPause( true )
-                                                setCountShutdown( countShutdown + 0.25 )
-                                        }
-
-                                        if ( playerdata.state === "stop" ) {
-                                                setCountShutdown( countShutdown + 1 )
-                                        }
-
-                                        if ( playerdata.state !== "pause" && playerdata.service !== "Capture" && playerdata.state !== "stop" ){
-                                                setisPause( false )
-                                                setShutdown( false )
-                                                setCountShutdown( 0 )
-                                        }
-
-                                        countShutdown >= shutDownWhenStopSeconds 
-                                                ? setShowStopOverlay( true ) 
-                                                : setShowStopOverlay( false )
-                                        countShutdown >= shutDownWhenStopSeconds * 2
-                                                ? setShutdown( true ) 
-                                                : setShutdown( false )
-
-                                        setdata( playerdata );
-                                        setonswitch( true )
-                                        setIsBeingChecked( false )
-                                        setloading( false )
                                 }
-                        }
                 }, waitduration );
                 return () => clearInterval( refreshInterval );
         }, );
@@ -168,6 +161,7 @@ export default function Home( ) {
         const myPalette = new ColourPalette( );
 
         const makePalette = ( palette ) => {
+                setonswitch( true )
 
                 // * Results into:
 
@@ -206,7 +200,9 @@ export default function Home( ) {
                         const lightvibrant = 'rgba(' + palette.LightVibrant._rgb[ 0 ] + ', ' + palette.LightVibrant._rgb[ 1 ] + ', ' + palette.LightVibrant._rgb[ 2 ] + ', 1 )'
                         myPalette.appendValueToList( "lightvibrant", lightvibrant )
                 }catch( e ){ null }
+
                 setColourPalette( myPalette.colors )
+                setonswitch( true )
         }
 
         function updatePaletteFromImage ( image: string ) {
@@ -227,9 +223,11 @@ export default function Home( ) {
                 fetch( "http://192.168.0.222:11000/Play" )
         }
         function handleLeftSwipe( ) {
+                setonswitch( true )
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Next" )
         }
         function handleRightSwipe( ) {
+                setonswitch( true )
                 fetch( "http://192.168.0.222:11000/Action?service=TidalConnect&action=Previous" )
         }
         function handleUpSwipe( ) {
@@ -241,7 +239,7 @@ export default function Home( ) {
                 setIncreasedTopmarginPlayercontainer( true )
         }
 
-        useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, setSwipeAnimation, triggerDistance, setTriggerdistance);
+        useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, triggerDistance, setTriggerdistance);
 
         return <>
                 {/* { colourPalette != undefined && <>
@@ -303,7 +301,7 @@ export default function Home( ) {
                                 colourPalette     = { colourPalette }
                                 action_pause      = { handleClickPause }
                                 action_play       = { handleClickPlay }
-                                // swipeAnimation    = { swipeAnimation }
+
                                 increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />
                 </>}                    

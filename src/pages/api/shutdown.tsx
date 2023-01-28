@@ -4,8 +4,19 @@ type Data = {
   data: object
 }
 export default async function handler( req: NextApiRequest, res: NextApiResponse<Data> ) {
+  try {
+
     const url = "http://192.168.0.31/s/bluesound/displayOff.py"
     const r = await fetch( url )
-    res.status( 200 )
-    console.log( r )
+    const data = await r.json().then( ( data ) => (
+      res.status( 200 ).json( { data } )
+    ))
+
+  } catch ( err ) {
+
+      const data = { error: 'failed to load data' }
+      res.status( 500 ).json( { data } )
+      console.log( data )
+
+  }
 }

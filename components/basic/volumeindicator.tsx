@@ -10,8 +10,10 @@ interface Props {
 export default function Component( props: Props ) {
 
         const [ time, setTime ] = useState<number>( 3 )
-        const [ fadeout, setFadeout ] = useState<number>( 1 )
+        const [ fadeout, setFadeout ] = useState<number>( 0 )
         const [ stylesForOverlay, setStylesForOverlay ] = useState<object>( { opacity: "1" } )
+
+
 
         useEffect( ( ) => {
                 const countDown = setInterval( async ( ) => {
@@ -21,13 +23,12 @@ export default function Component( props: Props ) {
                         setFadeout( 
                                 0
                         )
-                        console.log( fadeout )
                         setStylesForOverlay( { opacity: fadeout } )
                 }, 1000);
                 return () => clearInterval( countDown )
         })
 
-        if ( time <= 0 ) {
+        if ( time < 0 ) {
                 props.action( false )
         }
 

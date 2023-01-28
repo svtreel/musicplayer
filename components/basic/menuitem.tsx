@@ -14,8 +14,8 @@ export default function Component( props: Props ) {
 
         return <> 
             <div className={ s.container } onClick = { ( e ) => props.action( props.label ) }>
-                <span style = {{ border: colour }}>
-                    { props.label }
+                <span className = "material-icons-outlined" style = {{ border: colour }}>
+                    { props.icon }
                 </span>
             </div>
         </>

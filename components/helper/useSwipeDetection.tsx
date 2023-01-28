@@ -26,7 +26,6 @@ export default function useSwipeDetection(
   right: Function, 
   up: Function, 
   down: Function, 
-  animation: Function, 
   triggerDistance: number,
   setTriggerdistance: Function
    ) {
@@ -53,35 +52,7 @@ export default function useSwipeDetection(
       
       const distanceY = distance_initY(startY, endY);
       const deltaY = startY > endY ? Math.round( startY-endY ) : Math.round( endY-startY )
-        
-      if ( startX > endX + 10 ) {
-        animation( {
-            direction: "right",
-            delta: deltaX
-        } )
 
-      }
-      if ( startX < endX - 10 ) {
-        animation( {
-            direction: "left",
-            delta: deltaX
-        } )
-
-      }
-      if ( startY < endY - 10 ) {
-        animation( {
-            direction: "up",
-            delta: deltaY
-        } )
-
-      }
-      if ( startY > endY + 10 ) {
-        animation( {
-            direction: "Down",
-            delta: deltaY
-        } )
-
-      }
       if ( distanceX > triggerDistance ) {
         return handleTouchEnd( event )
       }
@@ -102,25 +73,17 @@ export default function useSwipeDetection(
       if ( startY === null || endY === null ) return;
 
       if ( distanceX > triggerDistance && startX < endX ) {
-        console.log( "Right swipe detected" )
         right( );
-        animation( { direction: "", delta: 0 } )
       }
       if ( distanceX > triggerDistance && startX > endX ) {
-        console.log( "Left swipe detected" )
         left( );
-        animation( { direction: "", delta: 0 } )
       }
       if ( distanceY > triggerDistance && startY < endY ) {
-        console.log( "Down swipe detected" )
         down( );
-        animation( { direction: "", delta: 0 } )
       }
       if ( distanceY > triggerDistance && startY > endY ) {
-        console.log( "Up swipe detected" )
         setTriggerdistance(150)
         up( );
-        animation( { direction: "", delta: 0 } )
       }
 
       setStartX( null );
