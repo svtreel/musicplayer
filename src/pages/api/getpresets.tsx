@@ -7,7 +7,7 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
-    const url = "http://192.168.0.31/s/bluesound/getpresets.py"
+    const url = "http://192.168.0.32/s/bluesound/getpresets.py"
     const r = await fetch( url )
     const data = await r.json()
     res.status( 200 ).json( { data } )
