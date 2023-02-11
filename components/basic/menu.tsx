@@ -59,7 +59,6 @@ export default function Component( props: Props ) {
         }
     }
 
-
     return <>
         <link
                 href    = "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
@@ -106,8 +105,8 @@ export default function Component( props: Props ) {
                             onClick = { ( ) => setRequest( getServiceURL( el ) ) } >
                             <img 
                                 className   = { s.selectableImage } 
-                                src         = { el.image } >
-                                alt         = { el.image }
+                                src         = { el.image } 
+                                alt         = "">
                             </img>
                             <p> 
                                 { el.name } 

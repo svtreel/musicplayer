@@ -92,10 +92,10 @@ export default function Home( ) {
                 setFadeout( false )
 
                 const i = data.image !== "n/A" ? data.image : ""
-                
+
                 return updatePaletteFromImage( i )
 
-        }, [ data.image ] )
+        }, [ data.image, updatePaletteFromImage ] )
         
         const shutDownOrLeaveOn = useMemo( ( ) => { 
 
