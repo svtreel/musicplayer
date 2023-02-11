@@ -120,9 +120,7 @@ export default function Home( ) {
                                 if ( isBeingChecked === false ) {
 
                                         setonswitch( true )
-
                                         setFadeout( true )
-
                                         setIsBeingChecked( true )
 
                                         const url = "/api/getmeta"
