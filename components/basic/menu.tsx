@@ -30,7 +30,7 @@ export default function Component( props: Props ) {
                 }
             }
         )()
-    }, [ show ] )
+    }, [ show, loading ] )
 
     const showUpdate = ( arg: string ) => {
         setData( [ ] )
@@ -49,7 +49,7 @@ export default function Component( props: Props ) {
                 }
             }
         )()
-    }, [ request ] )
+    }, [ request, props ] )
 
     const getServiceURL = ( el: {id: number, url: string} ) => {
         if ( show == "presets" ){
@@ -107,6 +107,7 @@ export default function Component( props: Props ) {
                             <img 
                                 className   = { s.selectableImage } 
                                 src         = { el.image } >
+                                alt         = { el.image }
                             </img>
                             <p> 
                                 { el.name } 

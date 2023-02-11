@@ -105,5 +105,5 @@ export default function useSwipeDetection(
       window.removeEventListener( 'touchmove', handleTouchMove, false );
       window.removeEventListener( 'touchend', handleTouchEnd, false );
     };
-  }, [ startX, endX, triggerDistance, left, right, up, down ] );
+  }, [ endY, startY, startX, endX, setTriggerdistance, triggerDistance, left, right, up, down ] );
 }

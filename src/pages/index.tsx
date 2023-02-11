@@ -68,7 +68,6 @@ export default function Home( ) {
         const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
-        const [ volumeUpdated, setVolumeUpdated ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
         const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 )
@@ -79,9 +78,6 @@ export default function Home( ) {
         }, [ data.seconds, data.length ] )
 
         const volumeUpdate = useMemo( ( ) => { 
-                if ( volumeOverlay === true ){
-                        setVolumeUpdated ( true )
-                }
                 return showVolumeChange( data.volume )
         }, [ data.volume ] )
 
@@ -96,6 +92,7 @@ export default function Home( ) {
                 setFadeout( false )
 
                 const i = data.image !== "n/A" ? data.image : ""
+                
                 return updatePaletteFromImage( i )
 
         }, [ data.image ] )
