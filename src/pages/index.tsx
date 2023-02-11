@@ -64,7 +64,7 @@ export default function Home( ) {
                         "darkmuted": "rgba( 255, 255, 255, 1 )",
                 } 
         )
-        const [ waitduration, setwaitduration ] = useState<number>( 1200 )
+        const [ waitduration, setwaitduration ] = useState<number>( 1300 )
         const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
         const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
