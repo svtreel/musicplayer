@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     try {
 
-        const url = "http://192.168.0.32/s/bluesound/disiplayoff.py"
+        const url = "http://192.168.0.32/s/bluesound/displayoff.py"
         const r = await fetch( url )
         const data = await r.json().then( ( data ) => (
           res.status( 200 ).json( { data } )

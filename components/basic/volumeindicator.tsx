@@ -3,27 +3,26 @@ import React, { useEffect, useState } from 'react';
 import s from './volumeindicator.module.css'
 
 interface Props {
+        state: boolean,
         volume: number,
         action: Function
 }
 
 export default function Component( props: Props ) {
 
-        const [ time, setTime ] = useState<number>( 3 )
+        const timeshown = 2
+
+        const [ time, setTime ] = useState<number>( timeshown )
         const [ fadeout, setFadeout ] = useState<number>( 0 )
         const [ stylesForOverlay, setStylesForOverlay ] = useState<object>( { opacity: "1" } )
-
-
 
         useEffect( ( ) => {
                 const countDown = setInterval( async ( ) => {
 
-                        setTime( time -1 )
-
-                        setFadeout( 
-                                0
-                        )
+                        setTime( time - 1 )
+                        setFadeout( 0 )
                         setStylesForOverlay( { opacity: fadeout } )
+
                 }, 1000);
                 return () => clearInterval( countDown )
         })
