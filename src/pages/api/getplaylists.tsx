@@ -6,15 +6,20 @@ type Data = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+
   try {
+
     const url = "http://192.168.0.32/s/bluesound/getplaylists.py"
     const r = await fetch( url )
-    const data = await r.json()
-    res.status( 200 ).json( { data } )
-    console.log( data )
+    const data = await r.json().then( ( data ) => (
+      res.status( 200 ).json( { data } )
+    ))
+
   } catch ( err ) {
-    const data = { error: 'failed to load data' }
-    res.status( 500 ).json( { data } )
-    console.log( data )
+
+      const data = { error: 'failed to load data' }
+      res.status( 500 ).json( { data } )
+      console.log( data )
+
   }
 }

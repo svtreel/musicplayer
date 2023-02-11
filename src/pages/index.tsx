@@ -45,6 +45,7 @@ export default function Home( ) {
                         error: undefined
                         }
                 )
+        const [ context, setContext ] = useState<string>( "stopscreen" )
         const [ isPause, setisPause ] = useState( false )
         const [ increasedTopmarginPlayercontainer, setIncreasedTopmarginPlayercontainer ] = useState( false )
         const [ loading, setloading ] = useState( true )
@@ -132,21 +133,25 @@ export default function Home( ) {
 
                                                 if ( playerdata.data.service === "Capture" ){
                                                         setCountShutdown( countShutdown + 12 )
+                                                        setContext( "music" )
                                                 }
 
                                                 if ( playerdata.data.state === "pause" ){
                                                         setisPause( true )
                                                         setCountShutdown( countShutdown + 0.25 )
+                                                        setContext( "music" )
                                                 }
 
                                                 if ( playerdata.data.state === "stop" ) {
                                                         setCountShutdown( countShutdown + 1 )
+                                                        setContext( "stopscreen" )
                                                 }
 
                                                 if ( playerdata.data.state !== "pause" && playerdata.data.service !== "Capture" && playerdata.data.state !== "stop" ){
                                                         setisPause( false )
                                                         setShutdown( false )
                                                         setCountShutdown( 0 )
+                                                        setContext( "music" )
                                                 }
 
                                                 countShutdown >= shutDownWhenStopSeconds 
@@ -252,23 +257,14 @@ export default function Home( ) {
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, triggerDistance, setTriggerdistance);
 
         return <>
-                {/* { colourPalette != undefined && <>
-                        <div style={{ backgroundColor: colourPalette.vibrant, width: "100px", height: "30px" }}>vibrant
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.darkvibrant, width: "100px", height: "30px" }}>darkvibrant
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.lightvibrant, width: "100px", height: "30px" }}>lightvibrant
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.darkvibrantlight, width: "100px", height: "30px" }}>darkvibrantlight
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.muted, width: "100px", height: "30px" }}>muted
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.darkmuted, width: "100px", height: "30px" }}>darkmuted
-                        </div>
-                        <div style={{ backgroundColor: colourPalette.lightmuted, width: "100px", height: "30px" }}>lightmuted
-                        </div>
-                </> } */}
-                { volumeOverlay === true && loading === false && <> 
+                { context === "stopscreen" && <>
+                {/* <MainMenu
+                                action = { setTopMenu }
+                                action2 = { setIncreasedTopmarginPlayercontainer }
+                                swipeDistance = { setTriggerdistance }
+                        /> */}
+                </>}
+                { context === "music" && volumeOverlay === true && loading === false && <> 
                         <Volumeindicator
                                 volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
@@ -299,8 +295,8 @@ export default function Home( ) {
                 { loading == true && <>
                         <Waitscreen />
                 </> }
-
-                { loading == false && colourPalette != undefined && data.quality != "n/A" && <>
+                
+                { context == "music" && loading == false && colourPalette != undefined && data.quality != "n/A" && <>
                         
                         <Playercontainer
                                 data              = { data }

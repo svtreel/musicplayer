@@ -17,9 +17,9 @@ interface Props {
 export default function Component( props: Props ) {
 
         const fadeoutValue = props.fadeout === true ? "1" : "0"
-        const transitionConf = props.fadeout === true ? "2s" : "0s"
+        const transitionConf = props.fadeout === true ? "1.5s" : "0s"
         const delayConf = props.fadeout === true ? "0s" : "0s"
-        const scaleConf = props.fadeout === true ? "1" : "0.97"
+        const scaleConf = props.fadeout === true ? "1" : "0.96"
 
         return <>
                 <div className={ s.container }>
@@ -27,14 +27,14 @@ export default function Component( props: Props ) {
                          { props.serviceIcon && <>
                                 { props.onswitch == false && <>
                                         { props.isPause === false && <> 
-                                        <Artwork
-                                                artwork         = { "/blackpixel.png" }
-                                                paused          = { false }
-                                                pauseImage      = { "not required" }
-                                                action          = { ( ) => { } }
-                                        />
-                                        <Loader/>
-                                </> }
+                                                <Artwork
+                                                        artwork         = { "/blackpixel.png" }
+                                                        paused          = { false }
+                                                        pauseImage      = { "not required" }
+                                                        action          = { ( ) => { } }
+                                                />
+                                                <Loader/>
+                                        </> }
                                 </> }
                                 < div className = { s.fade } style = {
                                                 { 
