@@ -93,9 +93,10 @@ export default function Home( ) {
 
                 const i = data.image !== "n/A" ? data.image : ""
 
-                return updatePaletteFromImage( i )
+                const v = new Vibrant( i );
+                v.getPalette(( err, palette ) => makePalette( palette ));
 
-        }, [ data.image, updatePaletteFromImage ] )
+        }, [ data.image ] )
         
         const shutDownOrLeaveOn = useMemo( ( ) => { 
 
@@ -217,10 +218,7 @@ export default function Home( ) {
                 setonswitch( true )
         }
 
-        function updatePaletteFromImage ( image: string ) {
-                const v = new Vibrant( image );
-                v.getPalette(( err, palette ) => makePalette( palette ));
-        }
+ 
 
         function updateProgressCalculation ( lengthOfSong: number, secondsOfSong: number ) {
                 return Math.round(( 100 / lengthOfSong ) * secondsOfSong + 1 );
