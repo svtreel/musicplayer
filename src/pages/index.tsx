@@ -114,6 +114,8 @@ export default function Home( ) {
 
                                                 if ( playerdata.data.service === "Capture" ) {
                                                         setBlackout( true )
+                                                } else {
+                                                        setBlackout( false )
                                                 }
 
                                                 setdata( playerdata.data )
