@@ -103,14 +103,10 @@ export default function Home( ) {
                 if ( shutDown === true ) {
                         const url = "/api/shutdown";
                         const r = fetch( url )
-
-                        setwaitduration(10000)
                 }
                 if ( shutDown === false ) {
                         const url = "/api/turnon";
                         const r = fetch( url );
-
-                        setwaitduration(1200)
                 }
 
         }, [ shutDown ] )
@@ -157,6 +153,7 @@ export default function Home( ) {
                                                 countShutdown >= shutDownWhenStopSeconds 
                                                         ? setShowStopOverlay( true ) 
                                                         : setShowStopOverlay( false )
+
                                                 countShutdown >= shutDownWhenStopSeconds * 2
                                                         ? setShutdown( true ) 
                                                         : setShutdown( false )
