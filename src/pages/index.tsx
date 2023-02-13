@@ -26,8 +26,6 @@ class ColourPalette {
 
 export default function Home( ) {
 
-        const shutDownWhenStopSeconds = 120
-
         const [ data, setdata ] = useState(
                 {
                         artist: "n/A",
@@ -65,8 +63,7 @@ export default function Home( ) {
                 } 
         )
         const [ waitduration, setwaitduration ] = useState<number>( 1300 )
-        const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
-        const [ shutDown, setShutdown ] = useState( false )
+
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
@@ -97,19 +94,6 @@ export default function Home( ) {
                 v.getPalette(( err, palette ) => makePalette( palette ));
 
         }, [ data.image ] )
-        
-        const shutDownOrLeaveOn = useMemo( ( ) => { 
-
-                if ( shutDown === true ) {
-                        const url = "/api/shutdown";
-                        const r = fetch( url )
-                }
-                if ( shutDown === false ) {
-                        const url = "/api/turnon";
-                        const r = fetch( url );
-                }
-
-        }, [ shutDown ] )
 
         useEffect( ( ) => {
 
@@ -126,37 +110,6 @@ export default function Home( ) {
                                         const playerdata = await r.json( )
 
                                         if ( playerdata.data.error === undefined ) {
-
-                                                if ( playerdata.data.service === "Capture" ){
-                                                        setCountShutdown( countShutdown + 12 )
-                                                        setContext( "music" )
-                                                }
-
-                                                if ( playerdata.data.state === "pause" ){
-                                                        setisPause( true )
-                                                        setCountShutdown( countShutdown + 0.25 )
-                                                        setContext( "music" )
-                                                }
-
-                                                if ( playerdata.data.state === "stop" ) {
-                                                        setCountShutdown( countShutdown + 1 )
-                                                        setContext( "stopscreen" )
-                                                }
-
-                                                if ( playerdata.data.state !== "pause" && playerdata.data.service !== "Capture" && playerdata.data.state !== "stop" ){
-                                                        setisPause( false )
-                                                        setShutdown( false )
-                                                        setCountShutdown( 0 )
-                                                        setContext( "music" )
-                                                }
-
-                                                countShutdown >= shutDownWhenStopSeconds 
-                                                        ? setShowStopOverlay( true ) 
-                                                        : setShowStopOverlay( false )
-
-                                                countShutdown >= shutDownWhenStopSeconds * 2
-                                                        ? setShutdown( true ) 
-                                                        : setShutdown( false )
 
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
@@ -263,12 +216,6 @@ export default function Home( ) {
                                 state  = { volumeOverlay }
                                 volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
-                </>}
-                { showStopOverlay === true &&< >
-                        <div 
-                                className = { "overlay" }
-                                onClick = { ( ) => { setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
-                        </div>
                 </>}
                 { topMenu === true && <> 
                         <Menu
