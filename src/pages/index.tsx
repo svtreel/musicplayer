@@ -114,11 +114,11 @@ export default function Home( ) {
                                                 setIsBeingChecked( false )
                                                 setloading( false )
 
-                                                if ( playerdata.data.service === "Capture" ) {
-                                                        const url = "/api/shutdown"
+                                                if ( playerdata.data.service == "Capture" ) {
+                                                        const url = "/api/turnon"
                                                         const r = await fetch( url )
                                                 } else {
-                                                        const url = "/api/turnon"
+                                                        const url = "/api/shutdown"
                                                         const r = await fetch( url )
                                                 }
 
