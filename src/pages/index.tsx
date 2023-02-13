@@ -63,7 +63,6 @@ export default function Home( ) {
                 } 
         )
         const [ waitduration, setwaitduration ] = useState<number>( 1300 )
-
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
@@ -114,6 +113,15 @@ export default function Home( ) {
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
                                                 setloading( false )
+
+                                                if ( playerdata.data.service === "Capture" ) {
+                                                        const url = "/api/shutdown"
+                                                        const r = await fetch( url )
+                                                } else {
+                                                        const url = "/api/turnon"
+                                                        const r = await fetch( url )
+                                                }
+
                                         }
                                 }
                 }, waitduration );
