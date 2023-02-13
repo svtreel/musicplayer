@@ -26,6 +26,8 @@ class ColourPalette {
 
 export default function Home( ) {
 
+        const shutDownWhenStopSeconds = 120
+
         const [ data, setdata ] = useState(
                 {
                         artist: "n/A",
@@ -63,6 +65,8 @@ export default function Home( ) {
                 } 
         )
         const [ waitduration, setwaitduration ] = useState<number>( 1300 )
+        const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
+        const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
@@ -93,6 +97,19 @@ export default function Home( ) {
                 v.getPalette(( err, palette ) => makePalette( palette ));
 
         }, [ data.image ] )
+        
+        const shutDownOrLeaveOn = useMemo( ( ) => { 
+
+                if ( shutDown === true ) {
+                        const url = "/api/shutdown";
+                        const r = fetch( url )
+                }
+                if ( shutDown === false ) {
+                        const url = "/api/turnon";
+                        const r = fetch( url );
+                }
+
+        }, [ shutDown ] )
 
         useEffect( ( ) => {
 
@@ -110,18 +127,17 @@ export default function Home( ) {
 
                                         if ( playerdata.data.error === undefined ) {
 
+                                                if ( playerdata.data.service === "Capture" ){
+                                                        setContext( "music" )
+                                                        setShutdown( true )
+                                                } else (
+                                                        setShutdown( false )
+                                                )
+
+
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
                                                 setloading( false )
-
-                                                // if ( playerdata.data.service == "Capture" ) {
-                                                //         const url = "/api/turnon"
-                                                //         const r = await fetch( url )
-                                                // } else {
-                                                //         const url = "/api/shutdown"
-                                                //         const r = await fetch( url )
-                                                // }
-
                                         }
                                 }
                 }, waitduration );
@@ -224,6 +240,12 @@ export default function Home( ) {
                                 state  = { volumeOverlay }
                                 volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
+                </>}
+                { showStopOverlay === true &&< >
+                        <div 
+                                className = { "overlay" }
+                                onClick = { ( ) => { setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
+                        </div>
                 </>}
                 { topMenu === true && <> 
                         <Menu
