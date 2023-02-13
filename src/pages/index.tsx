@@ -45,11 +45,12 @@ export default function Home( ) {
                         error: undefined
                         }
                 )
-        const [ context, setContext ] = useState<string>( "stopscreen" )
+        const [ context, setContext ] = useState<string>( "music" )
         const [ isPause, setisPause ] = useState( false )
         const [ increasedTopmarginPlayercontainer, setIncreasedTopmarginPlayercontainer ] = useState( false )
         const [ loading, setloading ] = useState( true )
         const [ onswitch, setonswitch ] = useState( false )
+        const [ blackout, setBlackout ] = useState( false )
         const [ showStopOverlay, setShowStopOverlay ] = useState( false )
         const [ topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
@@ -65,13 +66,10 @@ export default function Home( ) {
                 } 
         )
         const [ waitduration, setwaitduration ] = useState<number>( 1300 )
-        const [ countShutdown, setCountShutdown ] = useState<number>( 0 )
-        const [ shutDown, setShutdown ] = useState( false )
         const [ volumeOverlay, setVolumeOverlay ] = useState( false )
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
         const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 )
-
 
         const progress = useMemo( ( ) => { 
                 return updateProgressCalculation( data.length, data.seconds )
@@ -97,19 +95,6 @@ export default function Home( ) {
                 v.getPalette(( err, palette ) => makePalette( palette ));
 
         }, [ data.image ] )
-        
-        const shutDownOrLeaveOn = useMemo( ( ) => { 
-
-                if ( shutDown === true ) {
-                        const url = "/api/shutdown";
-                        const r = fetch( url )
-                }
-                if ( shutDown === false ) {
-                        const url = "/api/turnon";
-                        const r = fetch( url );
-                }
-
-        }, [ shutDown ] )
 
         useEffect( ( ) => {
 
@@ -127,18 +112,15 @@ export default function Home( ) {
 
                                         if ( playerdata.data.error === undefined ) {
 
-                                                if ( playerdata.data.service === "Capture" ){
-                                                        setContext( "music" )
-                                                        setShutdown( true )
-                                                } else (
-                                                        setShutdown( false )
-                                                )
-
+                                                if ( playerdata.data.service === "Capture" ) {
+                                                        setBlackout( true )
+                                                }
 
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
                                                 setloading( false )
                                         }
+
                                 }
                 }, waitduration );
                 return () => clearInterval( refreshInterval );
@@ -226,8 +208,15 @@ export default function Home( ) {
         }
 
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, triggerDistance, setTriggerdistance);
-
+        
+       
+        
         return <>
+                { blackout === true  && data.title1 !== "Bluetooth" && <>
+
+                        <div className =" blackout "></div>
+
+                        </>}
                 { context === "stopscreen" && <>
                 {/* <MainMenu
                                 action = { setTopMenu }
@@ -241,12 +230,7 @@ export default function Home( ) {
                                 volume = { volumeValue }
                                 action = { setVolumeOverlay }/>
                 </>}
-                { showStopOverlay === true &&< >
-                        <div 
-                                className = { "overlay" }
-                                onClick = { ( ) => { setShowStopOverlay( false ), setShutdown( false ), setCountShutdown( 0 )}  }>
-                        </div>
-                </>}
+
                 { topMenu === true && <> 
                         <Menu
                                 action = { setTopMenu }
