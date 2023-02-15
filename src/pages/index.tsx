@@ -117,6 +117,11 @@ export default function Home( ) {
                                                 } else {
                                                         setBlackout( false )
                                                 }
+                                                if ( playerdata.data.state === "Pause" ) {
+                                                        setisPause( true )
+                                                } else {
+                                                        setisPause( false )
+                                                }
 
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
