@@ -1,13 +1,12 @@
 import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
+import Banner from '../../components/basic/banner'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
-
 import React, { useState, useEffect, useMemo } from 'react'
-import { ImageSource } from 'node-vibrant/lib/typing';
 import Menu from '../../components/basic/menu';
 import Volumeindicator from '../../components/basic/volumeindicator';
-import { Empty } from 'antd';
+import { BannerPlugin } from 'webpack';
 
 class ColourPalette {
         public colors: any;
@@ -26,15 +25,13 @@ class ColourPalette {
 
 export default function Home( ) {
 
-        const shutDownWhenStopSeconds = 120
-
         const [ data, setdata ] = useState(
                 {
                         artist: "n/A",
                         image: "n/A",
-                        length: 0,
+                        length: 100,
                         quality: "n/A",
-                        seconds: 0,
+                        seconds: 100,
                         service: "n/A",
                         serviceIcon: "n/A",
                         state: "n/A",
@@ -51,7 +48,6 @@ export default function Home( ) {
         const [ loading, setloading ] = useState( true )
         const [ onswitch, setonswitch ] = useState( false )
         const [ blackout, setBlackout ] = useState( false )
-        const [ showStopOverlay, setShowStopOverlay ] = useState( false )
         const [ topMenu, setTopMenu] = useState( false )
         const [ isBeingChecked, setIsBeingChecked ] = useState( false )
         const [ colourPalette, setColourPalette ] = useState( 
@@ -70,18 +66,26 @@ export default function Home( ) {
         const [ volumeValue, setVolumeValue ] = useState<number>( 0 )
         const [ fadeout, setFadeout ] = useState<boolean>( false )
         const [ triggerDistance, setTriggerdistance ]   = useState<number>( 150 )
+        const [ errorState, setErrorState ]   = useState<boolean>( false )
+        const [ errorMSG, setErrorMSG ]   = useState<string>( "" )
 
         const progress = useMemo( ( ) => { 
+                
                 return updateProgressCalculation( data.length, data.seconds )
+
         }, [ data.seconds, data.length ] )
 
         const volumeUpdate = useMemo( ( ) => { 
+
                 return showVolumeChange( data.volume )
+
         }, [ data.volume ] )
 
         function showVolumeChange( vol: number ) {
+                
                 setVolumeOverlay( true )
                 setVolumeValue( vol )
+
         }
         
         const updateImageOnDemand = useMemo( ( ) => { 
@@ -99,7 +103,7 @@ export default function Home( ) {
         useEffect( ( ) => {
 
                 const refreshInterval = setInterval( async ( ) => {
-                                
+
                                 if ( isBeingChecked === false ) {
 
                                         setonswitch( true )
@@ -109,6 +113,7 @@ export default function Home( ) {
                                         const url = "/api/getmeta"
                                         const r = await fetch( url )
                                         const playerdata = await r.json( )
+                                        
 
                                         if ( playerdata.data.error === undefined ) {
 
@@ -126,9 +131,20 @@ export default function Home( ) {
                                                 setdata( playerdata.data )
                                                 setIsBeingChecked( false )
                                                 setloading( false )
+                                                setErrorState( false )
+
+                                        } else {
+
+                                                setErrorMSG( playerdata.data.error )
+                                                setErrorState( true )
+                                                setIsBeingChecked( false )
+
                                         }
 
+                                        
+
                                 }
+                                
                 }, waitduration );
                 return () => clearInterval( refreshInterval );
         }, );
@@ -136,6 +152,7 @@ export default function Home( ) {
         const myPalette = new ColourPalette( );
 
         const makePalette = ( palette ) => {
+
                 setonswitch( true )
                 setFadeout( true )
 
@@ -177,11 +194,12 @@ export default function Home( ) {
                         myPalette.appendValueToList( "lightvibrant", lightvibrant )
                 }catch( e ){ null }
 
-                setColourPalette( myPalette.colors )
+                try{
+                        setColourPalette( myPalette.colors )
+                }catch( e ){ null }
+
                 setonswitch( true )
         }
-
- 
 
         function updateProgressCalculation ( lengthOfSong: number, secondsOfSong: number ) {
                 return Math.round(( 100 / lengthOfSong ) * secondsOfSong + 1 );
@@ -216,9 +234,14 @@ export default function Home( ) {
 
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, triggerDistance, setTriggerdistance);
         
-       
-        
         return <>
+                { errorState === true  && <>
+
+                        <Banner
+                                text = "API not available" />
+
+                </>}
+
                 { blackout === true  && data.title1 !== "Bluetooth" && <>
 
                         <div className =" blackout "></div>

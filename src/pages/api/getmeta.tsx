@@ -7,7 +7,7 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
-    try {
+    try {a
 
         const url = "http://192.168.0.32/s/bluesound/nodemeta.py"
         const r = await fetch( url )

@@ -1,0 +1,31 @@
+.container{
+        width:99%;
+        background-color:#e57373;
+        padding:1rem;
+        border-radius: 15px;
+        margin:5px;
+        box-sizing: border-box;
+        border:4px solid #dd4848;
+        display: flex;
+        align-items: center;
+}
+.warn{
+        font-size:4rem;
+        color:#111;
+        margin-left:1rem;
+}
+.text{
+        font-size:3rem;
+        color:#111;
+        margin-left:2rem;
+}
+.fade{
+        width:100%;
+        position:absolute;
+        height:800px;
+        background-color:green;
+        opacity:0.8;
+        z-index: 3;
+        background: rgb(0,0,0);
+background: linear-gradient(180deg, rgba(0,0,0,1) 22%, rgba(0,0,0,0) 100%);
+}
