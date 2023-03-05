@@ -1,6 +1,6 @@
 import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
-import Backgroundeffect from '../../components/basic/backgroundeffect'
+// import Backgroundeffect from '../../components/basic/backgroundeffect'
 import Banner from '../../components/basic/banner'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
@@ -299,7 +299,7 @@ export default function Home( ) {
                                 increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />
                 </>}  
-                <Backgroundeffect
+                {/* <Backgroundeffect
                         vibrant = { colourPalette.vibrant }
                         lightvibrant = { colourPalette.lightvibrant }
                         darkvibrant = { colourPalette.darkvibrant }
@@ -308,7 +308,7 @@ export default function Home( ) {
                         lightmuted = { colourPalette.lightmuted }
                         darkmuted = { colourPalette.darkmuted }
                         reload = { onswitch }
-                />                   
+                />                    */}
         </>
 
         
