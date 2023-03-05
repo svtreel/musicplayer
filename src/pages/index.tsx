@@ -1,5 +1,6 @@
 import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
+import Backgroundeffect from '../../components/basic/backgroundeffect'
 import Banner from '../../components/basic/banner'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
@@ -297,23 +298,20 @@ export default function Home( ) {
 
                                 increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
                         />
-                </>}                    
+                </>}  
+                <Backgroundeffect
+                        vibrant = {colourPalette.vibrant}
+                        lightvibrant = {colourPalette.lightvibrant}
+                        darkvibrant = {colourPalette.darkvibrant}
+                        darkvibrantlight = {colourPalette.darkvibrantlight}
+                        muted = {colourPalette.muted}
+                        lightmuted = {colourPalette.lightmuted}
+                        darkmuted = {colourPalette.darkmuted}
+                />                   
         </>
+
+        
         }
 
 
 
-{/* <Backgroundeffect
-    r = {CpaletteBar[0]?CpaletteBar[0]:null}
-    g = {CpaletteBar[1]?CpaletteBar[1]:null}
-    b = {CpaletteBar[2]?CpaletteBar[2]:null}
-    rh = {CpaletteHl[0]?CpaletteHl[0]:null}
-    gh = {CpaletteHl[1]?CpaletteHl[1]:null}
-    bh = {CpaletteHl[2]?CpaletteHl[2]:null}
-    rBG = {CpaletteBarBG[0]?CpaletteBarBG[0]:null}
-    gBG = {CpaletteBarBG[1]?CpaletteBarBG[1]:null}
-    bBG = {CpaletteBarBG[2]?CpaletteBarBG[2]:null}
-    rm = {Cpalettem[0]?Cpalettem[0]:null}
-    gm = {Cpalettem[1]?Cpalettem[1]:null}
-    bm = {Cpalettem[2]?Cpalettem[2]:null}/> 
-*/}
