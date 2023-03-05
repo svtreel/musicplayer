@@ -69,9 +69,10 @@ export default function Component( props: Props ) {
 
         const height = 480
         const width  = 800
-        let duration = "5s"
-        let delay = "2s"
-        let blur = "blur(50px)"
+        let duration = "10s"
+        let delay = "3s"
+        let blur = "blur(40px)"
+        let opacConf = 7
 
         const addPX = (v: Number) => {
                 return v+"px"
@@ -85,7 +86,7 @@ export default function Component( props: Props ) {
 
                         let myRec = new Rec( );
 
-                        let opacity = ( Math.floor( Math.random( ) * 7 ) / 9 )
+                        let opacity = ( Math.floor( Math.random( ) * 7 ) / opacConf )
                         let temp_height = Math.floor( Math.random( ) * 350     + 1 )
                         let temp_width = Math.floor( Math.random( )  * 400     + 1 )
                         let temp_top = Math.floor( Math.random( )    * height  + 1 )
