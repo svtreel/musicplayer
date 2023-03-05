@@ -1,3 +1,5 @@
+import s from './backgroundeffect.module.css'
+
 interface Props {
         vibrant : string,
         lightvibrant : string,
@@ -15,18 +17,6 @@ export default function Component( props: Props ) {
         let count = 15
         let duration = "8s"
         let blur = "blur(130px)"
-
-        const container_static = { 
-                position: "absolute",
-                height: height + "px", 
-                width: width + "px",
-                top:"0px",
-                left:"0px",
-                overflow: "hidden",
-                zIndex: -1,
-                transitionDuration: "1s",
-                backgroundColor:"black"
-        }
 
         count = count -1
         console.log(count)
@@ -58,7 +48,7 @@ export default function Component( props: Props ) {
 
 
         return <>
-                <div style = { container_static }>
+                <div className = { s.container_static }>
 
                         <div style = {{ 
                                         position: "absolute",
