@@ -14,7 +14,6 @@ export default function Component( props: Props ) {
 
         const height = 480
         const width  = 800
-        let count = 15
         let duration = "8s"
         let blur = "blur(130px)"
 
