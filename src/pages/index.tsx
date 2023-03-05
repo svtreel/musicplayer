@@ -300,13 +300,14 @@ export default function Home( ) {
                         />
                 </>}  
                 <Backgroundeffect
-                        vibrant = {colourPalette.vibrant}
-                        lightvibrant = {colourPalette.lightvibrant}
-                        darkvibrant = {colourPalette.darkvibrant}
-                        darkvibrantlight = {colourPalette.darkvibrantlight}
-                        muted = {colourPalette.muted}
-                        lightmuted = {colourPalette.lightmuted}
-                        darkmuted = {colourPalette.darkmuted}
+                        vibrant = { colourPalette.vibrant }
+                        lightvibrant = { colourPalette.lightvibrant }
+                        darkvibrant = { colourPalette.darkvibrant }
+                        darkvibrantlight = {colourPalette.darkvibrantlight }
+                        muted = { colourPalette.muted }
+                        lightmuted = { colourPalette.lightmuted }
+                        darkmuted = { colourPalette.darkmuted }
+                        reload = { onswitch }
                 />                   
         </>
 
