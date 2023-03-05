@@ -69,11 +69,11 @@ export default function Component( props: Props ) {
 
         const height = 480
         const width  = 800
-        let duration = "9s"
+        let duration = "12s"
         let delay = "2s"
-        let blur = "blur(80px)"
+        let blur = "blur(40px)"
         let opacConf = 4
-        let numberOfRects = 8
+        let numberOfRects = 5
 
         const addPX = (v: Number) => {
                 return v+"px"
