@@ -18,10 +18,7 @@ export default function Component( props: Props ) {
         let duration = "8s"
         let blur = "blur(130px)"
 
-        count = count -1
-        console.log(count)
-
-        const randomPosition = (f) => {
+        const randomPosition = (f: string) => {
 
                 let value = 0
                 f == "top" ? value = Math.floor(Math.random() * height + 1 ) : null
@@ -30,7 +27,7 @@ export default function Component( props: Props ) {
                 return value + "px"
 
         }
-        const randomWidthHeight = (f) => {
+        const randomWidthHeight = (f: string) => {
 
                 let value = 0
                 f == "height" ? value = Math.floor(Math.random() * 350 + 1 ) : null
@@ -45,7 +42,6 @@ export default function Component( props: Props ) {
                 return value / 10
 
         }
-
 
         return <>
                 <div className = { s.container_static }>
