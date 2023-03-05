@@ -151,7 +151,7 @@ export default function Component( props: Props ) {
                         <div className = { s.container_static }>
 
                                 {recs == true && <>
-                                        {React.Children.toArray( loadedList.map( ( rec: Object ) => ( <> 
+                                        {React.Children.toArray( loadedList.map( ( rec ) => ( <> 
                                                 <div style = {{ 
                                                                 position: "absolute",
                                                                 filter: blur,
