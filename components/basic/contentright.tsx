@@ -42,8 +42,7 @@ export default function Component( props: Props ) {
                         }
                 } else {
                         return { 
-                                "opacity": "0", 
-                                "transition": "0s"
+                                "opacity": "0"
                         }
                 }
         }
@@ -56,31 +55,15 @@ export default function Component( props: Props ) {
                         <div 
                                 className = { s.container }
                                 style = { checkforswitch() } >
-                                { props.onswitch != true && <>
-                                        <Title 
-                                        text            = { "..." }
-                                        colourPalette   = { props.colourPalette }
-                                        service         = { props.service }
-                                        onswitch        = { true }
-                                /></>}
-                                { props.onswitch == true && <>
+                                
+
                                         <Title 
                                         text            = { props.title }
                                         colourPalette   = { props.colourPalette }
                                         service         = { props.service }
                                         onswitch        = { props.onswitch }
-                                /></>}
-                                
-                                { props.state != "connecting" && <>
-                                { props.onswitch != true && <>
-                                        <Artist 
-                                                text    = { "..." }
-                                                colour  = { props.colourPalette.lightmuted }
                                         />
-                                        <Album 
-                                                text    = { "..." }
-                                        />
-                                </>}
+                                { props.state != "connecting" && props.service != "Capture" && <> 
                                         <Artist 
                                                 text    = { props.artist }
                                                 colour  = { props.colourPalette.lightmuted }
@@ -88,7 +71,7 @@ export default function Component( props: Props ) {
                                         <Album 
                                                 text    = { props.album }
                                         />
-                                </> }
+                                </>}
                                 { props.progress <= 100 && 
                                         props.state != "connecting" && 
                                         props.service != "TuneIn" && 
@@ -103,7 +86,7 @@ export default function Component( props: Props ) {
                                 </> }
                                 { props.state == "connecting" && props.service != "Capture" && <> 
 
-                                <Loader/>
+                                        <Loader/>
 
                                 </> }
                         </div>

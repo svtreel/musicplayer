@@ -8,8 +8,8 @@
         padding:1rem;
         margin-left:-1rem;
         margin-top:4rem;
-        opacity:1;
-        transition-delay: 2.4s;
+        opacity:0;
+        transition-duration: 1s;
 }
 .loadercontainer{
         position: absolute;

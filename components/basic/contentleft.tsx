@@ -12,6 +12,7 @@ interface Props {
         action_play: Function;
         action_pause: Function;
         fadeout: boolean;
+        progress: number;
 }
 
 export default function Component( props: Props ) {
@@ -63,6 +64,7 @@ export default function Component( props: Props ) {
                                                                 action          = { props.action_pause }
                                                                 pauseImage      = { "not required" }
                                                                 paused          = { false }
+                                                                progress        = { props.progress }
                                                         />
                                                 </> }     
                                         </> }  

@@ -61,8 +61,9 @@ export default function Component( props: Props ) {
                                                 onswitch          = { props.onswitch }
                                                 isPause           = { props.isPause }
                                                 artwork           = { props.artwork }
-                                                action_pause      = { props.action_pause}
-                                                action_play       = { props.action_play}
+                                                action_pause      = { props.action_pause }
+                                                action_play       = { props.action_play }
+                                                progress          = { props.progress }
                                                 fadeout           = { props.fadeout }
                                 />
                                 <Contentright

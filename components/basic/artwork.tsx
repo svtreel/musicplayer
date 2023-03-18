@@ -6,47 +6,42 @@ interface Props {
   artwork: string | null;
   paused: boolean;
   action: Function;
+  progress: number | null;
 }
 
 export default function Component( props: Props ) {
 
-        const [show, setshow] = useState<boolean>(false);
+        const [show, setShow] = useState<boolean>(false)
+        const [style, setstyle] = useState<object>()
 
         useEffect( ( ) => {
+                const to = setTimeout( async ( ) => {
+                        setShow(true)
+                        if ( props.progress < 90 ) {
+                                setstyle({"opacity": "0.2"})
+                        } else {
+                                setstyle({"opacity": "0"})
+                        }
+                        
+                }, 1000 );
 
-                const tO = setTimeout( async ( ) => {
-
-                        setshow( true )
-                                
-                }, 2000 );
+                return () => clearInterval( to );
         }, );
 
-        const switchstyles = (v: number) => {
-                if ( v === 1 ) {
-                        return { 
-                                "opacity": "0.2",
-                                "transition": "12s"
-                        }
-                } else {
-                        return {
-                                "opacity": "0",
-                                "transition": "0s"
-                        }
-                }
-        }
-        const checkforswitch = () => {
-                return show === true ? switchstyles(1) : switchstyles(2)
-        }
-        
+        const IconForPause = <link
+                href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+                rel="stylesheet">
+        </link>;
 
         return <>
-                <link
-                        href = "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-                        rel = "stylesheet" >
-                </link>
-                { props.paused == true && <>   
+
+                {IconForPause}
+
+                { props.paused == true && <>
                         <div className = { s.container }>
-                                <div className = "material-icons-outlined" onClick = { ( e ) => props.action( ) }>
+                                <div 
+                                        className = "material-icons-outlined" 
+                                        onClick = { ( e ) => props.action( ) }>
                                         pause
                                 </div>
                         </div>
@@ -58,11 +53,12 @@ export default function Component( props: Props ) {
                                 src = { props.artwork } 
                                 onClick = { ( e ) => props.action( ) }
                         />
-                        { show !== false && <>
+                        { props.fade != true && <>
+                                
                                         <img 
                                                 className = { s.artworkBG }
+                                                style = { style }
                                                 alt = "Artwork"
-                                                style = { checkforswitch() }
                                                 src = { props.artwork } 
                                                 onClick = { ( e ) => props.action( ) }
                                         />

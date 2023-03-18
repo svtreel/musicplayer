@@ -2,25 +2,25 @@
         width:350px;
         height:350px;
         border-radius:20px !important;
+        z-index:100;
+}
+.transition{
+        transition-duration:3s;
+        opacity:0;
+        transition-delay: 3s;
+        z-index:-5;
 }
 .artworkBG{
         min-width:400px;
         position:absolute;
-        opacity: 1;
-        filter: blur(20px);
-        z-index:-2;
+        filter: blur(25px);
         left:-10rem;
+        z-index:-5;
         top:-18rem;
         transform: rotate(-23deg);
-        transition-delay: 3s;
-}
-.vignette{
-        left:-3.5rem;
-        top:-7rem;
-        position:absolute;
-        width:300%;
-        height:200%;
-        z-index:-2;
+        transition-duration: 15s;
+        opacity: 0;
+        transition-delay: 2s;
 }
 .artwork:active{
         transform:scale(0.8);

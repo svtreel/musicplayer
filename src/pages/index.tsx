@@ -81,7 +81,6 @@ export default function Home( ) {
         }, [ data.volume ] )
 
         function showVolumeChange( vol: number ) {
-                
                 setVolumeOverlay( true )
                 setVolumeValue( vol )
 
@@ -131,17 +130,11 @@ export default function Home( ) {
                                                 setIsBeingChecked( false )
                                                 setloading( false )
                                                 setErrorState( false )
-
                                         } else {
-
                                                 setErrorMSG( playerdata.data.error )
                                                 setErrorState( true )
                                                 setIsBeingChecked( false )
-
                                         }
-
-                                        
-
                                 }
                                 
                 }, waitduration );
