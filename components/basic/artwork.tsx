@@ -53,7 +53,7 @@ export default function Component( props: Props ) {
                                 src = { props.artwork } 
                                 onClick = { ( e ) => props.action( ) }
                         />
-                        { props.fade != true && <>
+
                                 
                                         <img 
                                                 className = { s.artworkBG }
@@ -63,7 +63,7 @@ export default function Component( props: Props ) {
                                                 onClick = { ( e ) => props.action( ) }
                                         />
 
-                        </>}
+
                 </> }
         </>
 }
