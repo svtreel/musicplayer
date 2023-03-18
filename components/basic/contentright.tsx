@@ -35,12 +35,31 @@ interface Props {
 
 export default function Component( props: Props ) {
 
-        const fadeoutValue = props.fadeout === true ? "1" : "0"
+        const switchstyles = (v: number) => {
+                if ( v === 1 ) {
+                        return { 
+                                "opacity": "1", 
+                                "marginTop": "4rem"
+                        }
+                } else {
+                        return { 
+                                "opacity": "0", 
+                                "marginTop": "6rem",
+                                "transition": "0s"
+                        }
+                }
+        }
+        const checkforswitch = () => {
+                return props.onswitch == true ? switchstyles(1) : switchstyles(2)
+        }
+        
 
+       
         return <>
 
                         <div 
-                                className = { s.container }>
+                                className = { s.container }
+                                style = { checkforswitch() } >
 
                                 <Title 
                                         text            = { props.title }
