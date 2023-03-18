@@ -6,8 +6,8 @@
 .artworkBG{
         min-width:400px;
         position:absolute;
-        opacity: 0.1;
-        filter: blur(25px);
+        opacity: 0.05;
+        filter: blur(20px);
         z-index:-2;
         left:-10rem;
         top:-18rem;
