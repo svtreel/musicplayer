@@ -38,13 +38,11 @@ export default function Component( props: Props ) {
         const switchstyles = (v: number) => {
                 if ( v === 1 ) {
                         return { 
-                                "opacity": "1", 
-                                "marginTop": "4rem"
+                                "opacity": "1"
                         }
                 } else {
                         return { 
                                 "opacity": "0", 
-                                "marginTop": "6rem",
                                 "transition": "0s"
                         }
                 }
@@ -53,8 +51,6 @@ export default function Component( props: Props ) {
                 return props.onswitch == true ? switchstyles(1) : switchstyles(2)
         }
         
-
-       
         return <>
 
                         <div 
@@ -65,6 +61,7 @@ export default function Component( props: Props ) {
                                         text            = { props.title }
                                         colourPalette   = { props.colourPalette }
                                         service         = { props.service }
+                                        onswitch        = { props.onswitch }
                                 />
                                 { props.state != "connecting" && <>
                                         <Artist 

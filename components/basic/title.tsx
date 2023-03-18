@@ -4,6 +4,7 @@ import s from './title.module.css'
 interface Props {
     text: string;
     service: string;
+    onswitch: boolean;
     colourPalette: 
             {    
                     vibrant: string;
@@ -33,15 +34,11 @@ export default function Component( props: Props ) {
 
             setSize( titleHeight.current.clientHeight )
 
-            console.log( isSize )
-
             if ( isSize > 130 ) {
                 setOversize( true )
             } else {
                 setOversize( false )
             }
-
-            console.log( isOversize )
 
         }, 1000 );
     }, [ props.text ]);
@@ -49,7 +46,7 @@ export default function Component( props: Props ) {
 
     const getStyles = () => {
         const styleofText = {
-            "backgroundImage": "linear-gradient(116deg, "+ col1 +","+ col2 +", "+ col3 +", "+ col4 +")",
+            "backgroundImage": "linear-gradient(116deg, "+ col1 +","+ col2 +", "+ col3 +", "+ col4 +")"
         }
 
         return styleofText
@@ -65,15 +62,15 @@ export default function Component( props: Props ) {
 
             
         <div className = { s.titlewrapper }>
-            <div 
-                
-                >
-                <p 
-                    className = { s.title } 
-                    ref = { titleHeight }
-                    style = { getStyles() }>
-                        { props.text }
-                </p>
+            <div>
+                { props.onswitch === true && <>
+                    <p 
+                        className = { s.title } 
+                        ref = { titleHeight }
+                        style = { getStyles() }>
+                            { props.text }
+                    </p>
+                </>}
             </div>
         </div>
     </> 
