@@ -56,14 +56,31 @@ export default function Component( props: Props ) {
                         <div 
                                 className = { s.container }
                                 style = { checkforswitch() } >
-
-                                <Title 
+                                { props.onswitch != true && <>
+                                        <Title 
+                                        text            = { "..." }
+                                        colourPalette   = { props.colourPalette }
+                                        service         = { props.service }
+                                        onswitch        = { true }
+                                /></>}
+                                { props.onswitch == true && <>
+                                        <Title 
                                         text            = { props.title }
                                         colourPalette   = { props.colourPalette }
                                         service         = { props.service }
                                         onswitch        = { props.onswitch }
-                                />
+                                /></>}
+                                
                                 { props.state != "connecting" && <>
+                                { props.onswitch != true && <>
+                                        <Artist 
+                                                text    = { "..." }
+                                                colour  = { props.colourPalette.lightmuted }
+                                        />
+                                        <Album 
+                                                text    = { "..." }
+                                        />
+                                </>}
                                         <Artist 
                                                 text    = { props.artist }
                                                 colour  = { props.colourPalette.lightmuted }
@@ -84,11 +101,11 @@ export default function Component( props: Props ) {
                                                 tidal            = { props.service != "TidalConnect" ? true : false }
                                         />
                                 </> }
-                                {/* { props.state == "connecting" && props.service != "Capture" && <> 
-                                <div className = { s.loadercontainer }>
-                                                        <Loader/>
-                                                </div>
-                                </> } */}
+                                { props.state == "connecting" && props.service != "Capture" && <> 
+
+                                <Loader/>
+
+                                </> }
                         </div>
 
         </>

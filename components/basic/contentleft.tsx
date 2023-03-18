@@ -33,9 +33,9 @@ export default function Component( props: Props ) {
                                                         pauseImage      = { "not required" }
                                                         action          = { ( ) => { } }
                                                 />
-                                                <div className = { s.loadercontainer }>
+
                                                         <Loader/>
-                                                </div>
+
                                         </> }
                                         
                                 </> }

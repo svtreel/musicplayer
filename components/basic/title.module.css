@@ -26,6 +26,9 @@
         animation-timing-function: linear;
         animation-iteration-count: infinite;
         animation-delay: 5s;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
 }
 @keyframes background-pan {
         from {

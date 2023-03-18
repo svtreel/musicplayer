@@ -29,7 +29,7 @@ export default function Component( props: Props ) {
                                 src = { props.artwork } 
                                 onClick = { ( e ) => props.action( ) }
                         />
-                        <div >
+                        <div>
                                 <img 
                                         className = { s.artworkBG }
                                         alt = "Artwork"
