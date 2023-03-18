@@ -1,5 +1,4 @@
 .artwork{
-
         width:350px;
         height:350px;
         border-radius:20px !important;
@@ -7,12 +6,13 @@
 .artworkBG{
         min-width:400px;
         position:absolute;
-        opacity: 0.15;
+        opacity: 1;
         filter: blur(20px);
         z-index:-2;
         left:-10rem;
         top:-18rem;
-        transform: rotate(-23deg)
+        transform: rotate(-23deg);
+        transition-delay: 3s;
 }
 .vignette{
         left:-3.5rem;
