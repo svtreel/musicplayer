@@ -25,7 +25,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; 
         transition:10s;
-        animation: background-pan 15s linear infinite;
+        animation: background-pan 20s linear infinite;
 }
 @keyframes background-pan {
         from {

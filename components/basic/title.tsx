@@ -71,7 +71,7 @@ export default function Component( props: Props ) {
             
         <div className = { s.titlewrapper }>
             <div 
-                className = { getAnimation() }
+                
                 >
                 <p 
                     className = { s.title } 
