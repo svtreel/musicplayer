@@ -3,6 +3,24 @@
         height:350px;
         border-radius:20px !important;
 }
+.artworkBG{
+        min-width:400px;
+        position:absolute;
+        opacity: 0.1;
+        filter: blur(25px);
+        z-index:-2;
+        left:-10rem;
+        top:-18rem;
+        transform: rotate(-23deg)
+}
+.vignette{
+        left:-3.5rem;
+        top:-7rem;
+        position:absolute;
+        width:300%;
+        height:200%;
+        z-index:-2;
+}
 .artwork:active{
         transform:scale(0.8);
 }

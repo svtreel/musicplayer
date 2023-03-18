@@ -44,31 +44,6 @@ interface Props {
 
 export default function Component( props: Props ) {
 
-        // const factor = 25
-        // const cut = props.swipeAnimation.delta <= 200 ? props.swipeAnimation.delta : 200 
-        // const perspective = props.swipeAnimation.delta != 0 ? 600-cut : 2000
-        // const left = props.swipeAnimation.direction == "right" ? props.swipeAnimation.delta/factor : null
-        // const right = props.swipeAnimation.direction == "left" ? props.swipeAnimation.delta/factor : null
-        // const up = props.swipeAnimation.direction == "up" ? props.swipeAnimation.delta/factor: null
-        // const down = props.swipeAnimation.direction == "down" ? props.swipeAnimation.delta/factor : null
-
-        // const animationDirection_init = () => {
-
-        //         let animationDirection_style = ""
-
-        //         const ls = left != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateY(${left}deg)` : `perspective(0px)`
-        //         const rs = right != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateY(-${right}deg)` : `perspective(0px)`
-        //         const us = up != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateX(${up}deg)` : `perspective(0px)`
-        //         const ds = down != null ? `perspective(${perspective}px) scale(${perspective/(perspective)}) rotateX(-${down}deg)` : `perspective(0px)`
-                
-        //         left != null ? animationDirection_style = ls : null
-        //         right != null ? animationDirection_style = rs : null
-        //         up != null ? animationDirection_style = us : null
-        //         down != null ? animationDirection_style = ds : null
-
-        //         return animationDirection_style
-        // }
-
         const topmargin_init = props.increasedTopmarginPlayercontainer === true ? s.increasedMargin : s.notIncreasedMargin
 
         return <>

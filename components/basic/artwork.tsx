@@ -22,14 +22,6 @@ export default function Component( props: Props ) {
                                 </div>
                         </div>
                 </> }
-                {/* { props.artwork != undefined && <>
-                        <img 
-                                className = { s.artwork }
-                                alt = "Artwork"
-                                src = { props.artwork } 
-                                onClick = { ( e ) => props.action( ) }
-                        />
-                </> } */}
                 { props.artwork != undefined && <>
                         <img 
                                 className = { s.artwork }
@@ -37,6 +29,14 @@ export default function Component( props: Props ) {
                                 src = { props.artwork } 
                                 onClick = { ( e ) => props.action( ) }
                         />
+                        <div >
+                                <img 
+                                        className = { s.artworkBG }
+                                        alt = "Artwork"
+                                        src = { props.artwork } 
+                                        onClick = { ( e ) => props.action( ) }
+                                />
+                        </div>
                 </> }
         </>
 }

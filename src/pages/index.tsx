@@ -1,13 +1,11 @@
 import Waitscreen from '../../components/basic/waitscreen'
 import Playercontainer from '../../components/basic/playercontainer'
-// import Backgroundeffect from '../../components/basic/backgroundeffect'
 import Banner from '../../components/basic/banner'
 import useSwipeDetection from '../../components/helper/useSwipeDetection';
 import Vibrant from 'node-vibrant';
 import React, { useState, useEffect, useMemo } from 'react'
 import Menu from '../../components/basic/menu';
 import Volumeindicator from '../../components/basic/volumeindicator';
-import { BannerPlugin } from 'webpack';
 
 class ColourPalette {
         public colors: any;
@@ -236,79 +234,83 @@ export default function Home( ) {
         useSwipeDetection( handleLeftSwipe, handleRightSwipe, handleUpSwipe, handleDownSwipe, triggerDistance, setTriggerdistance);
         
         return <>
-                { errorState === true  && <>
+                { context === "music" && <> 
+                        { errorState === true  && <>
 
-                        <Banner
-                                text = "API not available" />
-
-                </>}
-
-                { blackout === true  && data.title1 !== "Bluetooth" && <>
-
-                        <div className =" blackout "></div>
+                                <Banner
+                                        text = "API not available" />
 
                         </>}
-                { context === "stopscreen" && <>
-                {/* <MainMenu
-                                action = { setTopMenu }
-                                action2 = { setIncreasedTopmarginPlayercontainer }
-                                swipeDistance = { setTriggerdistance }
-                        /> */}
-                </>}
-                { context === "music" && volumeOverlay === true && loading === false && <> 
-                        <Volumeindicator
-                                state  = { volumeOverlay }
-                                volume = { volumeValue }
-                                action = { setVolumeOverlay }/>
-                </>}
 
-                { topMenu === true && <> 
-                        <Menu
-                                action = { setTopMenu }
-                                action2 = { setIncreasedTopmarginPlayercontainer }
-                                swipeDistance = { setTriggerdistance }
-                        />
-                        <div className = "downshadow" ></div>
+                        { blackout === true  && data.title1 !== "Bluetooth" && <>
 
-                        <div 
-                                className = { "overlay" }>
-                        </div>
-                        <div 
-                                className = { "overlay" }>
-                        </div>
+                                <div className =" blackout "></div>
 
-                </> }
+                                </>}
+                        { context === "music" && volumeOverlay === true && loading === false && <> 
+                                <Volumeindicator
+                                        state  = { volumeOverlay }
+                                        volume = { volumeValue }
+                                        action = { setVolumeOverlay }/>
+                        </>}
 
-                { loading == true && <>
-                        <Waitscreen />
-                </> }
-                
-                { context == "music" && loading == false && colourPalette != undefined && data.quality != "n/A" && <>
+                        { topMenu === true && <> 
+                                <Menu
+                                        action = { setTopMenu }
+                                        action2 = { setIncreasedTopmarginPlayercontainer }
+                                        swipeDistance = { setTriggerdistance }
+                                />
+                                <div className = "downshadow" ></div>
+
+                                <div 
+                                        className = { "overlay" }>
+                                </div>
+                                <div 
+                                        className = { "overlay" }>
+                                </div>
+
+                        </> }
+
+                        { loading == true && <>
+                                <Waitscreen />
+                        </> }
                         
-                        <Playercontainer
-                                data              = { data }
-                                progress          = { progress }
-                                onswitch          = { onswitch }
-                                isPause           = { isPause }
-                                artwork           = { data.image }
-                                colourPalette     = { colourPalette }
-                                action_pause      = { handleClickPause }
-                                action_play       = { handleClickPlay }
-                                fadeout           = { fadeout }
+                        { context === "music" && loading == false && colourPalette != undefined && data.quality != "n/A" && <>
+                                
+                                <Playercontainer
+                                        data              = { data }
+                                        progress          = { progress }
+                                        onswitch          = { onswitch }
+                                        isPause           = { isPause }
+                                        artwork           = { data.image }
+                                        colourPalette     = { colourPalette }
+                                        action_pause      = { handleClickPause }
+                                        action_play       = { handleClickPlay }
+                                        fadeout           = { fadeout }
 
-                                increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
-                        />
-                </>}  
-                {/* <Backgroundeffect
-                        vibrant = { colourPalette.vibrant }
-                        lightvibrant = { colourPalette.lightvibrant }
-                        darkvibrant = { colourPalette.darkvibrant }
-                        darkvibrantlight = {colourPalette.darkvibrantlight }
-                        muted = { colourPalette.muted }
-                        lightmuted = { colourPalette.lightmuted }
-                        darkmuted = { colourPalette.darkmuted }
-                        reload = { onswitch }
-                />                    */}
+                                        increasedTopmarginPlayercontainer = { increasedTopmarginPlayercontainer }
+                                />
+                        </>}  
+                        {/* <Backgroundeffect
+                                vibrant = { colourPalette.vibrant }
+                                lightvibrant = { colourPalette.lightvibrant }
+                                darkvibrant = { colourPalette.darkvibrant }
+                                darkvibrantlight = {colourPalette.darkvibrantlight }
+                                muted = { colourPalette.muted }
+                                lightmuted = { colourPalette.lightmuted }
+                                darkmuted = { colourPalette.darkmuted }
+                                reload = { onswitch }
+                        />                    */}
+                </>}
+                { context !== "music" && <>
+                
+
+                
+                </>}
+
+
+
+
         </>
 
         

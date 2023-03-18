@@ -1,23 +1,49 @@
+.titlewrapper {
+        overflow:hidden;
+        height:8.4rem;
+}
+.animate{
+        animation-name: updownA;
+        animation-duration: 10s;
+}
+.titlewrapper2 {
+        position: relative;
+        display:flex;
+        animation-duration: 10s;
+}
 .title{
-        font-size: 3.5rem;
+        font-size: 3.3rem;
         line-height:4rem;
-        min-height:4.2rem;
         text-transform: uppercase;
         display:flex;
-        max-height:8.4rem;
-        height:8.4rem;
         margin-bottom:0rem;
         font-weight: 800;
-}
-
-.title{
         background-color: white;   
-        background-size: 100%;
+        position:relative;
+        background-size: 200%;  
         background-repeat: repeat; 
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent; 
-        -moz-background-clip: text;
-        -moz-text-fill-color: transparent;
         transition:10s;
-
+        animation: background-pan 15s linear infinite;
 }
+@keyframes background-pan {
+        from {
+          background-position: 0% center;
+        }
+        
+        to {
+          background-position: -200% center;
+        }
+}
+@keyframes updownA {
+        from {
+          top: 0px ;
+        }
+        
+        to {
+          top: -60px ;
+        }
+}
+
+/* 153.008px */

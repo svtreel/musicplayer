@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from "react";
 import s from './title.module.css'
 
 interface Props {
@@ -21,17 +21,65 @@ export default function Component( props: Props ) {
     const col1 = props.service !== "Capture" ? props.colourPalette.lightvibrant : "rgb(121,121,121)"
     const col2 = props.service !== "Capture" ? props.colourPalette.muted : "rgb(233,233,233)"
     const col3 = props.service !== "Capture" ? props.colourPalette.vibrant : "rgb(111,111,111)"
+    const col4 = props.service !== "Capture" ? props.colourPalette.lightvibrant : "rgb(121,121,121)"
+    
+    const titleHeight = useRef(null);
+    const [isOversize, setOversize] = useState<boolean>(false);
+    const [isSize, setSize] = useState<number>(0);
+
+    useEffect( ( ) => {
+
+        const timeout = setTimeout( async ( ) => {
+
+            setSize( titleHeight.current.clientHeight )
+
+            console.log( isSize )
+
+            if ( isSize > 130 ) {
+                setOversize( true )
+            } else {
+                setOversize( false )
+            }
+
+            console.log( isOversize )
+
+        }, 1000 );
+    }, [ props.text ]);
 
 
-    const styleofText = {
-        "backgroundImage": "linear-gradient(116deg, "+ col1 +","+ col2 +", "+ col3 +")",
+    const getStyles = () => {
+        const styleofText = {
+            "backgroundImage": "linear-gradient(116deg, "+ col1 +","+ col2 +", "+ col3 +", "+ col4 +")",
+        }
+
+        return styleofText
+        
+    }
+    const getAnimation = () => {
+
+        return s.animate
+        
     }
 
     return <>
-        <p 
-            className = { s.title } 
-            style = { styleofText }>
-                { props.text }
-        </p>
+        {/* { isOversize === true && <> 
+            <p>
+            asd
+            </p>
+        </> } */}
+
+            
+        <div className = { s.titlewrapper }>
+            <div 
+                className = { getAnimation() }
+                >
+                <p 
+                    className = { s.title } 
+                    ref = { titleHeight }
+                    style = { getStyles() }>
+                        { props.text }
+                </p>
+            </div>
+        </div>
     </> 
 }
