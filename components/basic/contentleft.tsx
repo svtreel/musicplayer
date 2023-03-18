@@ -33,9 +33,13 @@ export default function Component( props: Props ) {
                                                         pauseImage      = { "not required" }
                                                         action          = { ( ) => { } }
                                                 />
-                                                <Loader/>
+                                                <div className = { s.loadercontainer }>
+                                                        <Loader/>
+                                                </div>
                                         </> }
+                                        
                                 </> }
+
                                 < div className = { s.fade } style = {
                                                 { 
                                                         opacity : fadeoutValue,
