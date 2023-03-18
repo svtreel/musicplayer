@@ -33,6 +33,7 @@ export default function Component( props: Props ) {
                                                         paused          = { false }
                                                         pauseImage      = { "not required" }
                                                         action          = { ( ) => { } }
+                                                        progress        = { props.progress }
                                                 />
 
                                                         <Loader/>
@@ -56,6 +57,7 @@ export default function Component( props: Props ) {
                                                                 action          = { props.action_play }
                                                                 pauseImage      = { "not required" }
                                                                 paused          = { true }
+                                                                progress        = { props.progress }
                                                         />
                                                 </>} 
                                                 { props.isPause === false && <> 
