@@ -79,6 +79,7 @@ export default function Component( props: Props ) {
                                         paused          = { false }
                                         pauseImage      = {"not required"}
                                         action          = { () => {} }
+                                        progress        = { props.progress }
                                 />
                         </>}                  
                 </div>
