@@ -17,5 +17,5 @@
 }
 
 .fade {
-        transition: "transform" 0.2s !important;
+        transition: "transform" 0.5s !important;
 }
