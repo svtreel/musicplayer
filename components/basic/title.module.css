@@ -2,10 +2,6 @@
         overflow:hidden;
         height:8.4rem;
 }
-.animate{
-        animation-name: updownA;
-        animation-duration: 10s;
-}
 .titlewrapper2 {
         position: relative;
         display:flex;
@@ -26,6 +22,7 @@
         -webkit-text-fill-color: transparent; 
         transition:10s;
         animation: background-pan 20s linear infinite;
+        animation-delay: 5s;
 }
 @keyframes background-pan {
         from {

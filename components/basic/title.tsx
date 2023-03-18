@@ -55,11 +55,6 @@ export default function Component( props: Props ) {
         return styleofText
         
     }
-    const getAnimation = () => {
-
-        return s.animate
-        
-    }
 
     return <>
         {/* { isOversize === true && <> 
