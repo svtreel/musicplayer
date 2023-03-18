@@ -22,6 +22,13 @@ export default function Component( props: Props ) {
         const delayConf = props.fadeout === true ? "0s" : "0s"
         const scaleConf = props.fadeout === true ? "1" : "0.96"
 
+        const styleObjectForFade = { 
+                opacity : fadeoutValue,
+                transition : transitionConf,
+                transitionDelay : delayConf,
+                transform : "scale(" + scaleConf + ")",
+        }
+
         return <>
                 <div className={ s.container }>
                 
@@ -42,14 +49,10 @@ export default function Component( props: Props ) {
                                         
                                 </> }
 
-                                < div className = { s.fade } style = {
-                                                { 
-                                                        opacity : fadeoutValue,
-                                                        transition : transitionConf,
-                                                        transitionDelay : delayConf,
-                                                        transform : "scale(" + scaleConf + ")",
-                                                }
-                                        }>
+                                < div 
+                                        className = { s.fade } 
+                                        style = { styleObjectForFade }
+                                        >
                                         { props.onswitch == true && <>
                                                 { props.isPause === true && <> 
                                                         <Artwork
@@ -77,7 +80,7 @@ export default function Component( props: Props ) {
                                 <Artwork
                                         artwork         = { props.artwork }
                                         paused          = { false }
-                                        pauseImage      = {"not required"}
+                                        pauseImage      = { "not required" }
                                         action          = { () => {} }
                                         progress        = { props.progress }
                                 />
