@@ -28,22 +28,20 @@ export default function Component( props: Props ) {
         const styleofText = {
             "backgroundImage": "linear-gradient(116deg, "+ col1 +","+ col2 +", "+ col3 +", "+ col4 +")"
         }
-
         return styleofText
-        
     }
 
     return <>
             
         <div className = { s.titlewrapper }>
             <div>
-                { props.onswitch === true && <>
+                
                     <p 
                         className = { s.title } 
                         style = { getStyles() }>
                             { props.text }
                     </p>
-                </>}
+
             </div>
         </div>
     </> 

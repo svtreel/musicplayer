@@ -3,19 +3,14 @@
         height:350px;
         border-radius:20px !important;
         z-index:100;
-}
-.transition{
-        transition-duration:3s;
-        opacity:0;
-        transition-delay: 3s;
-        z-index:-5;
+        z-index:-1;
 }
 .artworkBG{
         min-width:400px;
         position:absolute;
         filter: blur(25px);
         left:-10rem;
-        z-index:-5;
+        z-index:-3;
         top:-18rem;
         transform: rotate(-23deg);
         transition-duration: 15s;

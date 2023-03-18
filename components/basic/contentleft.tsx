@@ -22,19 +22,13 @@ export default function Component( props: Props ) {
         const delayConf = props.fadeout === true ? "0s" : "0s"
         const scaleConf = props.fadeout === true ? "1" : "0.96"
 
-        const styleObjectForFade = { 
-                opacity : fadeoutValue,
-                transition : transitionConf,
-                transitionDelay : delayConf,
-                transform : "scale(" + scaleConf + ")",
-        }
 
         return <>
                 <div className={ s.container }>
-                
                          { props.serviceIcon && <>
                                 { props.onswitch == false && <>
-                                        { props.isPause === false && <> 
+                                        { props.isPause == false && <> 
+                                                <Loader/>
                                                 <Artwork
                                                         artwork         = { "/blackpixel.png" }
                                                         paused          = { false }
@@ -42,16 +36,18 @@ export default function Component( props: Props ) {
                                                         action          = { ( ) => { } }
                                                         progress        = { props.progress }
                                                 />
-
-                                                        <Loader/>
-
+                                                
                                         </> }
-                                        
                                 </> }
 
                                 < div 
                                         className = { s.fade } 
-                                        style = { styleObjectForFade }
+                                        style = { { 
+                                                opacity : fadeoutValue,
+                                                transition : transitionConf,
+                                                transitionDelay : delayConf,
+                                                transform : "scale(" + scaleConf + ")",
+                                        } }
                                         >
                                         { props.onswitch == true && <>
                                                 { props.isPause === true && <> 

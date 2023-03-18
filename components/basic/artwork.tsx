@@ -11,12 +11,10 @@ interface Props {
 
 export default function Component( props: Props ) {
 
-        const [show, setShow] = useState<boolean>(false)
         const [style, setstyle] = useState<object>()
 
         useEffect( ( ) => {
                 const to = setTimeout( async ( ) => {
-                        setShow(true)
                         if ( props.progress < 90 ) {
                                 setstyle({"opacity": "0.2"})
                         } else {
@@ -53,17 +51,13 @@ export default function Component( props: Props ) {
                                 src = { props.artwork } 
                                 onClick = { ( e ) => props.action( ) }
                         />
-
-                                
-                                        <img 
-                                                className = { s.artworkBG }
-                                                style = { style }
-                                                alt = "Artwork"
-                                                src = { props.artwork } 
-                                                onClick = { ( e ) => props.action( ) }
-                                        />
-
-
+                        <img 
+                                className = { s.artworkBG }
+                                style = { style }
+                                alt = "Artwork"
+                                src = { props.artwork } 
+                                onClick = { ( e ) => props.action( ) }
+                        />
                 </> }
         </>
 }

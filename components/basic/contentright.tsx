@@ -38,11 +38,13 @@ export default function Component( props: Props ) {
         const switchstyles = (v: number) => {
                 if ( v === 1 ) {
                         return { 
-                                "opacity": "1"
+                                "opacity": "1",
+                                "transition": "0s"
                         }
                 } else {
                         return { 
-                                "opacity": "0"
+                                "opacity": "1",
+                                "transition": "0s"
                         }
                 }
         }
@@ -55,15 +57,16 @@ export default function Component( props: Props ) {
                         <div 
                                 className = { s.container }
                                 style = { checkforswitch() } >
-                                
+                                { props.state != "connecting" 
+                                        && props.service != "Capture" 
+                                        && <> 
 
                                         <Title 
-                                        text            = { props.title }
-                                        colourPalette   = { props.colourPalette }
-                                        service         = { props.service }
-                                        onswitch        = { props.onswitch }
+                                                text            = { props.title }
+                                                colourPalette   = { props.colourPalette }
+                                                service         = { props.service }
+                                                onswitch        = { props.onswitch }
                                         />
-                                { props.state != "connecting" && props.service != "Capture" && <> 
                                         <Artist 
                                                 text    = { props.artist }
                                                 colour  = { props.colourPalette.lightmuted }
